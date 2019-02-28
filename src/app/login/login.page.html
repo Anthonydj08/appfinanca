@@ -34,32 +34,41 @@
 
   <ion-grid>
     <ion-row>
-      <ion-input [(ngModel)]="email" placeholder="Digite o seu e-mail"></ion-input>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="contact"></ion-icon>
+        <ion-input [(ngModel)]="email" placeholder="Digite o seu e-mail"></ion-input>
+      </ion-item>
     </ion-row>
     <ion-row>
-      <ion-input [(ngModel)]="senha" type="password" placeholder="Digite a sua senha"></ion-input>
+      <ion-item lines="none">
+        <ion-icon slot="start" name="lock"></ion-icon>
+        <ion-input [(ngModel)]="senha" type="password" placeholder="Digite a sua senha"></ion-input>
+      </ion-item>
     </ion-row>
-    <ion-row>
-        <div text-end>
-        <ion-label (click)="senha()">Esqueceu a senha?</ion-label>
-      </div>
-
-    </ion-row>
+    
   </ion-grid>
   <ion-row>
     <ion-button fill="outline" mode="ios" expand="full" (click)="loginEmail()">Entrar</ion-button>
   </ion-row>
+  <ion-row padding>
+      <div text-center>
+        <ion-label (click)="senha()">Esqueceu a senha?</ion-label>
+      </div>
+    </ion-row>
   <ion-row>
     <ion-button fill="outline" mode="ios" expand="full" (click)="loginGoogle()">
       <img class="googleIcon" src="../../assets/icon/google-icon.png" alt="logo google">
       <ion-label padding>Entrar com google</ion-label>
     </ion-button>
+    <ion-button fill="outline" mode="ios" expand="full" (click)="loginGoogle()">
+        <img class="googleIcon" src="../../assets/icon/facebook.png" alt="logo facebook">
+        <ion-label padding>Entrar com Facebook</ion-label>
+      </ion-button>
   </ion-row>
 
-  <ion-row padding>
-    <ion-label (click)="irCadastro()">Não tem uma conta? Cadastre-se agora</ion-label>
+  <ion-row>
+    <div class="footer" text-center>
+      <ion-label (click)="irCadastro()">Não tem uma conta? Cadastre-se agora</ion-label>
+    </div>
   </ion-row>
-
-
-
 </ion-content>

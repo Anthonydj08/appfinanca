@@ -1,4 +1,4 @@
-<ion-content padding>
+<ion-content>
   <ion-buttons (click)="backToLogin()">
     <ion-icon name="arrow-round-back"></ion-icon>
     <ion-label>Login</ion-label>
@@ -6,14 +6,18 @@
 
   <ion-grid>
     <ion-row>
-      
+      <ion-label class="criarConta">Criar conta</ion-label>
+    </ion-row>
+    <img class="appIcon" src="../../assets/icon/icon.png" alt="logo app">
+    <ion-row>
       <ion-input [(ngModel)]="email" placeholder="Digite o seu e-mail"></ion-input>
     </ion-row>
     <ion-row>
       <ion-input [(ngModel)]="password" placeholder="Digite a sua senha"></ion-input>
     </ion-row>
-    <ion-row>
-      <ion-button (click)="register()">CADASTRAR</ion-button>
-    </ion-row>
   </ion-grid>
+
+  <ion-row>
+    <ion-button fill="outline" mode="ios" expand="full" (click)="register()">Cadastrar</ion-button>
+  </ion-row>
 </ion-content>

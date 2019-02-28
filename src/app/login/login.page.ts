@@ -15,9 +15,8 @@ export class LoginPage implements OnInit, OnDestroy {
     effect: 'slide',
     speed: 600,
     loop: true,
-    watchSlidesProgress:true,
     autoplay: {
-      delay: 7000,
+      delay: 4000,
     },
   };
   email: string;

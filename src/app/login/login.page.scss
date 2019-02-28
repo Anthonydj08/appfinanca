@@ -1,23 +1,24 @@
+ion-row,
+ion-item,
 ion-grid {
   display: block;
   justify-content: center;
   margin: auto;
-  text-align: center;
 }
-ion-row {
-  display: block;
-  justify-content: center;
-  margin: auto;
-  text-align: center;
-}
-.ilustracao{
-  width: 80%;
+.ilustracao {
+  width: 60%;
 }
 
 .googleIcon {
   width: 25px;
   height: 25px;
 }
-ion-button{
+ion-button {
   --border-radius: 5%;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 10px;
 }

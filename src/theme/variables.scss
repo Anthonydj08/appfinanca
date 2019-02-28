@@ -13,7 +13,10 @@
 
   --ion-toolbar-background: #4294b4;
   --ion-toolbar-color: white;
-
+  --ion-padding-top: 20px;
+  ion-button {
+    --border-radius: 5%;
+  }
   /** primary **/
   --ion-color-primary: #4294b4;
   --ion-color-primary-rgb: 66, 148, 180;
