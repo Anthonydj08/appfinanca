@@ -1,0 +1,65 @@
+<ion-content>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-grid fixed>
+        <ion-row>
+          <h1>Bem Vindo ao Controle Finanças</h1>
+        </ion-row>
+        <ion-row>
+          <img class="ilustracao" src="../../assets/ilustracao/savings.png" alt="imagem não encontrada">
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <ion-grid fixed>
+        <ion-row>
+          <h1>Acompanhe suas finanças detalhadamente</h1>
+        </ion-row>
+        <ion-row>
+          <img class="ilustracao" src="../../assets/ilustracao/investing.png" alt="imagem não encontrada">
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <ion-grid fixed>
+        <ion-row>
+          <h1>Gerencie seus gastos por categoria</h1>
+        </ion-row>
+        <ion-row>
+          <img class="ilustracao" src="../../assets/ilustracao/wallet.png" alt="imagem não encontrada">
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-grid>
+    <ion-row>
+      <ion-input [(ngModel)]="email" placeholder="Digite o seu e-mail"></ion-input>
+    </ion-row>
+    <ion-row>
+      <ion-input [(ngModel)]="senha" type="password" placeholder="Digite a sua senha"></ion-input>
+    </ion-row>
+    <ion-row>
+        <div text-end>
+        <ion-label (click)="senha()">Esqueceu a senha?</ion-label>
+      </div>
+
+    </ion-row>
+  </ion-grid>
+  <ion-row>
+    <ion-button fill="outline" mode="ios" expand="full" (click)="loginEmail()">Entrar</ion-button>
+  </ion-row>
+  <ion-row>
+    <ion-button fill="outline" mode="ios" expand="full" (click)="loginGoogle()">
+      <img class="googleIcon" src="../../assets/icon/google-icon.png" alt="logo google">
+      <ion-label padding>Entrar com google</ion-label>
+    </ion-button>
+  </ion-row>
+
+  <ion-row padding>
+    <ion-label (click)="irCadastro()">Não tem uma conta? Cadastre-se agora</ion-label>
+  </ion-row>
+
+
+
+</ion-content>

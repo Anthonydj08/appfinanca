@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Receitas
+      </ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    
+    <ion-card *ngFor="let receita of receita | async">
+      <ion-item>
+        <ion-icon (click)="deleteMensagem(receita.key)" color="danger" name="trash" slot="end"></ion-icon>
+        <ion-label>{{receita.nome}}</ion-label>
+      </ion-item>
+  
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <ion-label>{{receita.valor | currency: 'R$'}}</ion-label>
+          </ion-col>
+          <ion-col align-self-end size="3">
+            <div text-end>
+              <ion-label>{{receita.data | date: 'dd/MM'}}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+      
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="presentModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+  
+  </ion-content>

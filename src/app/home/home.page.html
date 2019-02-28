@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Finanças
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <div text-center text-uppercase class="mes">
+        <ion-label>Fevereiro</ion-label>
+      </div>
+    </ion-row>
+    <ion-row justify-content-center>
+      <div text-center>
+        <ion-label class="saldo">R$1.130,00</ion-label>
+      </div>
+
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-card class="receitas">
+    <ion-card-header>
+      <ion-card-title>Receitas</ion-card-title>
+    </ion-card-header>
+    <ion-item-divider>
+      <ion-card-content>
+        <ion-label class="esquerda">Venda de cocada</ion-label>
+        <ion-label class="direita">R$500,00</ion-label>
+      </ion-card-content>
+    </ion-item-divider>
+    <ion-item-divider>
+      <ion-card-content>
+        <ion-label class="esquerda">Salário</ion-label>
+        <ion-label class="direita">R$1.100,00</ion-label>
+      </ion-card-content>
+    </ion-item-divider>
+  </ion-card>
+
+  <ion-card class="despesas">
+    <ion-card-header>
+      <ion-card-title>Despesas</ion-card-title>
+    </ion-card-header>
+    <ion-item-divider>
+      <ion-card-content>
+        <ion-label class="esquerda">Conta de luz</ion-label>
+        <ion-label class="direita">R$210,00</ion-label>
+      </ion-card-content>
+    </ion-item-divider>
+    <ion-item-divider>
+      <ion-card-content>
+        <ion-label class="esquerda">Supermercado</ion-label>
+        <ion-label class="direita">R$260,00</ion-label>
+      </ion-card-content>
+    </ion-item-divider>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button data-desc="Nova receita" (click)="openReceita()">
+      <ion-icon name="trending-up" color="success"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button data-desc="Nova despesa" (click)="openDespesa()">
+      <ion-icon name="trending-down" color="danger"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+</ion-content>

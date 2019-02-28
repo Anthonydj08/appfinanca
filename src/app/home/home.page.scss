@@ -1,0 +1,52 @@
+
+.mes{
+    font-size: 100%;
+  }
+  .saldo{
+      
+      padding: 10px;
+      font-size: 200%;
+      color: rgb(52, 106, 255);
+  };
+  .receitas ion-card-header ion-card-title{
+      display: block;
+      justify-content: center;
+      margin: auto;
+      text-align: center;
+      color: green;
+  };
+  .despesas ion-card-header ion-card-title{
+      display: block;
+      justify-content: center;
+      margin: auto;
+      text-align: center;
+      color: red;
+  };
+  .receitas, .despesas, ion-item-divider ion-card-content{
+      display: block;
+    flex-wrap: wrap;
+     flex: 1;
+  };
+  .direita{
+  text-align: right;
+  };
+  .esquerda{
+    position: absolute;
+  };
+  
+  ion-fab-button[data-desc] {
+      position: relative;
+    }
+    
+    ion-fab-button[data-desc]::after {
+      position: absolute;
+      content: attr(data-desc);
+      z-index: 1;
+      right: 55px;
+      bottom: 4px;
+      background-color: var(--ion-color-primary);
+      padding: 9px;
+      border-radius: 15px;
+      color: white;
+      box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+    }

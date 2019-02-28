@@ -1,0 +1,7 @@
+{
+  "name": "controle-financas",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

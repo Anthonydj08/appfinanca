@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nova Receita</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+
+        <ion-back-button defaultHref="/"></ion-back-button>
+
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list insert>
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col size="1">
+          <ion-icon size="large" name="logo-usd"></ion-icon>
+        </ion-col>
+        <ion-col size="8">
+          <ion-input class="valor" placeholder="0,00" type="number" [(ngModel)]="novaReceita.valor">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row align-items-center>
+        <ion-col size="1">
+          <ion-icon size="large" name="create"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-input placeholder="Digite o nome da receita" type="text" [(ngModel)]="novaReceita.nome"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row align-items-center>
+        <ion-col size="1">
+          <ion-icon size="large" name="pricetag"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" cancelText="Cancelar"
+            [(ngModel)]="novaReceita.categoria" placeholder="Categoria">
+            <ion-select-option value="Salário">Salário</ion-select-option>
+            <ion-select-option value="Vendas">Vendas</ion-select-option>
+            <ion-select-option value="Juros">Juros</ion-select-option>
+            <ion-select-option value="Presentes">Presentes</ion-select-option>
+            <ion-select-option value="Outros">Outros</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-row align-items-center>
+        <ion-col size="1">
+          <ion-icon size="large" name="calendar"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-datetime display-format="DD/MM/YYYY" [min]="minDate" [(ngModel)]="startDate"
+            [(ngModel)]="novaReceita.data"></ion-datetime>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-list>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button [disabled]="!novaReceita.valor || !novaReceita.nome || !novaReceita.categoria " class="submit-btn"
+      (click)="salvar()" type="submit">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
