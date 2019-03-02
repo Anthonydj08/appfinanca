@@ -10,7 +10,6 @@ import { Receita } from '../model/receita';
 export class CadastroReceitaPage {
 
   novaReceita: Receita;
-
   constructor(public modalController: ModalController) {
     this.novaReceita = new Receita();
   }
@@ -18,8 +17,9 @@ export class CadastroReceitaPage {
   startDate = new Date().toISOString();
   maxDate = new Date().toISOString();
 
-  customActionSheetOptions: any = {
+  customAlertOptions: any = {
     header: 'Categorias',
+    mode: 'ios',
   };
 
   voltar() {

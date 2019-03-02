@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {FormsModule} from '@angular/forms';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
  
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
@@ -38,6 +39,7 @@ BrowserModule,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    LocalNotifications,
     AngularFireDatabase,
   ],
   bootstrap: [AppComponent]

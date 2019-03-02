@@ -1,26 +1,28 @@
 
 .mes{
     font-size: 100%;
+    color: white;
   }
   .saldo{
-      
       padding: 10px;
       font-size: 200%;
-      color: rgb(52, 106, 255);
+      color: rgb(255, 255, 255);
   };
-  .receitas ion-card-header ion-card-title{
+  .receitas ion-card-title{
       display: block;
       justify-content: center;
       margin: auto;
       text-align: center;
       color: green;
+      font-size: 22px;
   };
-  .despesas ion-card-header ion-card-title{
+  .despesas  ion-card-title{
       display: block;
       justify-content: center;
       margin: auto;
       text-align: center;
       color: red;
+      font-size: 22px;
   };
   .receitas, .despesas, ion-item-divider ion-card-content{
       display: block;
@@ -50,3 +52,8 @@
       color: white;
       box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
     }
+
+.resumo{
+  background: #4294b4;
+  //background-image: linear-gradient(#4294b4, white);
+}

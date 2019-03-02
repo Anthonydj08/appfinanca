@@ -34,15 +34,14 @@ export class LoginPage implements OnInit, OnDestroy {
   loginGoogle() {
     this.fAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(result => {
-        this.router.navigateByUrl('/tabs/home');
+        this.navCtrl.navigateRoot('/home');
       });
   }
 
   loginEmail() {
     this.fAuth.auth.signInWithEmailAndPassword(this.email, this.senha)
       .then(result => {
-        this.router.navigate(['/tabs']);
-        this.navCtrl.navigateRoot('/receita');
+        this.navCtrl.navigateRoot('/home');
 
       }).catch(error => {
         this.presentToast('E-mail e/ou senha inválido(s).');

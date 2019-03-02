@@ -18,8 +18,9 @@ export class CadastroDespesaPage {
   startDate = new Date().toISOString();
   maxDate = new Date().toISOString();
 
-  customActionSheetOptions: any = {
+  customAlertOptions: any = {
     header: 'Categorias',
+    mode: 'ios',
   };
 
   voltar() {

@@ -27,7 +27,6 @@ export class CadastroPage implements OnInit {
         this.presentToast('Erro ao cadastrar usuário');
         console.log(error);
       });
-
   }
 
   async presentToast(message: string) {

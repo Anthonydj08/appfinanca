@@ -9,9 +9,11 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
+    
   <ion-list insert>
     <ion-grid>
       <ion-row align-items-center>
@@ -38,7 +40,7 @@
           <ion-icon size="large" name="pricetag"></ion-icon>
         </ion-col>
         <ion-col>
-          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" cancelText="Cancelar"
+          <ion-select [interfaceOptions]="customAlertOptions"  interface="alert" cancelText="Cancelar"
             [(ngModel)]="novaReceita.categoria" placeholder="Categoria">
             <ion-select-option value="Salário">Salário</ion-select-option>
             <ion-select-option value="Vendas">Vendas</ion-select-option>

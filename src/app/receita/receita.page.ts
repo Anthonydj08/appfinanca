@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { NavController, ModalController, AlertController, ToastController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
   styleUrls: ['./receita.page.scss'],
 })
 export class ReceitaPage {
-  
+  valor: String;
   receitaDB: AngularFireList<Receita>;
   receita: Observable<Receita[]>;
 
@@ -30,21 +30,9 @@ export class ReceitaPage {
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
-    //listar por data
-   
+    console.log(this.getAll());
   }
-  //testes
-  
-  totalReceita(receita: Receita) {
-    let soma = 0;
-    for (let index = 0; index < this.receitaDB.set.length; index++) {
-      soma += 0;
-    }
 
-    console.log(soma);
-    return soma;
-  }
-  //
   async presentModal() {
     const modal = await this.modalController.create({
       component: CadastroReceitaPage
@@ -97,11 +85,21 @@ export class ReceitaPage {
   }
   delete(key: string) {
     this.receitaDB.remove(key)
-    .then(result => {
-      this.presentToast("Receita removida com sucesso.");
-    }).catch(error => {
-      this.presentToast("Erro ao remover a receita.");
-      console.log(error);
-    });
+      .then(result => {
+        this.presentToast("Receita removida com sucesso.");
+      }).catch(error => {
+        this.presentToast("Erro ao remover a receita.");
+        console.log(error);
+      });
   }
+
+  getAll() {
+    return this.db.database.ref('receitas');
+    /*return this.receita = this.receitaDB.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );*/
+  }
+
 }
