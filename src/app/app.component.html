@@ -15,12 +15,13 @@
           <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
             <app-menu-item [link]="p"></app-menu-item>
           </ion-menu-toggle>
-          <ion-item lines="none" (click)="logout()">
-            <ion-icon slot="start" name="walk"></ion-icon>
-            <ion-label (click)="logout()">Sair</ion-label>
-          </ion-item>
+          
         </ion-list>
       </ion-content>
+      <ion-item lines="none" (click)="logout()">
+          <ion-icon slot="start" name="walk"></ion-icon>
+          <ion-label (click)="logout()">Sair</ion-label>
+        </ion-item>
     </ion-menu>
 
     <!-- the main content -->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Despesa } from '../model/despesa';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
@@ -29,6 +29,7 @@ export class DespesaPage {
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
+    console.log(this.despesa);
   }
 
   async presentModal() {

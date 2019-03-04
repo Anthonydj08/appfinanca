@@ -23,6 +23,7 @@ export class ReceitaPage {
     public toast: ToastController, ) {
 
     this.receitaDB = db.list<Receita>('receita');
+    
     this.receita = this.receitaDB.valueChanges();
     //Deletar dado
     this.receita = this.receitaDB.snapshotChanges().pipe(

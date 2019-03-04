@@ -28,12 +28,12 @@ export class LoginPage implements OnInit, OnDestroy {
     private fAuth: AngularFireAuth,
     public router: Router,
     private menuCtrl: MenuController) {
-
   }
 
   loginGoogle() {
     this.fAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(result => {
+        firebase.auth.Auth.Persistence.LOCAL
         this.navCtrl.navigateRoot('/home');
       });
   }
