@@ -6,8 +6,6 @@ import { Receita } from '../model/receita';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { Despesa } from '../model/despesa';
 
-import { map } from 'rxjs/operators';
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -20,8 +18,8 @@ export class HomePage {
   receita: Observable<Receita[]>;
   despesaDB: AngularFireList<Despesa>;
   despesa: Observable<Despesa[]>;
-
-  constructor(public router: Router, public db: AngularFireDatabase,) {
+  
+  constructor(public router: Router, public db: AngularFireDatabase, ) {
     /*this.username = firebase.auth().currentUser.displayName.split(' ').slice(0, 1).join(' ');
     if(firebase.auth().currentUser){
     }*/
@@ -29,9 +27,8 @@ export class HomePage {
     this.receita = this.receitaDB.valueChanges();
     this.despesaDB = db.list<Despesa>('despesa');
     this.despesa = this.despesaDB.valueChanges();
-    
   }
-  
+
   openReceita() {
     //this.receita.presentModal();
     this.router.navigate(['/tabs/receita']);
@@ -39,5 +36,5 @@ export class HomePage {
   openDespesa() {
     this.router.navigate(['/tabs/despesa']);
   }
- 
+
 }

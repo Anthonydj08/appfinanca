@@ -7,15 +7,6 @@
   font-size: 200%;
   color: rgb(255, 255, 255);
 }
-.receita{
-  background-image: linear-gradient(to bottom right, #80ce20, #bfe78d);
-}
-.despesa{
-  background-image: linear-gradient(to bottom right, #ee3f5d, #e698a5);
-}
-.saldo2{
-  font-size: 150%;
-}
 .direita {
   text-align: right;
 }
@@ -47,7 +38,10 @@ ion-fab-button[data-desc]::after {
 ion-card-title {
   font-size: 22px;
 }
-.grid{
-  --ion-grid-column-padding:5px;
-
+.grid {
+  --ion-grid-column-padding: 5px;
+}
+.nomeReceita {
+  font-weight: bold;
+  font-size: 15px;
 }

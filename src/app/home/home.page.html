@@ -21,46 +21,40 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6" no-padding>
-        <ion-card class="receita" (click)="openReceita()">
-          <ion-row justify-content-center>
-            <div >
-              <ion-label>Receitas</ion-label>
-            </div>
-          </ion-row>
-          <ion-row justify-content-center>
-            <ion-label class="saldo2">R$2.130,00</ion-label>
-          </ion-row>
-        </ion-card>
+  <ion-grid padding>
+    <ion-row align-items-center>
+      <ion-col size="1.5"  offset="0.5" (click)="openReceita()">
+        <img class="icone" src="../../assets/icon/trendingUp2.png">
       </ion-col>
-      <ion-col size="6" no-padding>
-        <ion-card class="despesa" (click)="openDespesa()">
-          <ion-row justify-content-center>
-            <div >
-              <ion-label>Despesas</ion-label>
-            </div>
-          </ion-row>
-          <ion-row justify-content-center>
-            <ion-label class="saldo2">R$1.052,00</ion-label>
-          </ion-row>
-        </ion-card>
+      <ion-col size="4" (click)="openReceita()">
+        <ion-label>Receitas</ion-label>
+        <ion-row>
+          <ion-label>R$10.524,25</ion-label>
+        </ion-row>
+      </ion-col>
+      <ion-col size="1.5" offset="0.5" (click)="openDespesa()">
+        <img class="icone" src="../../assets/icon/trendingDown2.png">
+      </ion-col>
+      <ion-col size="4" (click)="openDespesa()">
+        <ion-label>Despesas</ion-label>
+        <ion-row>
+          <ion-label>R$5.452,25</ion-label>
+        </ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-card >
+  <ion-card style="margin-top: 0px;">
     <ion-card-header>
       <ion-card-title>Movimentações do dia</ion-card-title>
     </ion-card-header>
     <ion-grid *ngFor="let receita of receita | async">
       <ion-row align-items-center>
-        <ion-col size="2">
-          <img src="../../assets/icon/trending-up.png">
+        <ion-col size="1">
+          <img src="../../assets/icon/trendingUp.png">
         </ion-col>
-        <ion-col size="7">
-          <ion-label>{{receita.nome}}</ion-label>
+        <ion-col size="8">
+          <ion-label class="nomeReceita">{{receita.nome}}</ion-label>
           <ion-row align-items-end align-items-center>
             <ion-label>{{receita.categoria}}</ion-label>
           </ion-row>
@@ -71,21 +65,21 @@
       </ion-row>
     </ion-grid>
     <ion-grid *ngFor="let despesa of despesa | async">
-        <ion-row align-items-center>
-          <ion-col size="2">
-            <img src="../../assets/icon/trending-down.png">
-          </ion-col>
-          <ion-col size="7">
-            <ion-label>{{despesa.nome}}</ion-label>
-            <ion-row align-items-end align-items-center>
-              <ion-label>{{despesa.categoria}}</ion-label>
-            </ion-row>
-          </ion-col>
-          <ion-col size="3">
-            <ion-label class="esquerda">{{despesa.valor | currency: "BRL"}}</ion-label>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-row align-items-center>
+        <ion-col size="1">
+          <img src="../../assets/icon/trendingDown.png">
+        </ion-col>
+        <ion-col size="8">
+          <ion-label class="nomeReceita">{{despesa.nome}}</ion-label>
+          <ion-row align-items-end align-items-center>
+            <ion-label>{{despesa.categoria}}</ion-label>
+          </ion-row>
+        </ion-col>
+        <ion-col size="3">
+          <ion-label class="esquerda">-{{despesa.valor | currency: "BRL"}}</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

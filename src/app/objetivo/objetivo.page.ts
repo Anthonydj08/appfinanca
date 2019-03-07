@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Observable } from 'rxjs';
 import { NavController, ModalController, AlertController, ToastController } from '@ionic/angular';
-import { Receita } from '../model/receita';
+import { Objetivo } from '../model/objetivo';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
+import { CadastroObjetivoPage } from './../cadastro-objetivo/cadastro-objetivo.page';
 
 @Component({
-  selector: 'app-receita',
-  templateUrl: './receita.page.html',
-  styleUrls: ['./receita.page.scss'],
+  selector: 'app-objetivo',
+  templateUrl: './objetivo.page.html',
+  styleUrls: ['./objetivo.page.scss'],
 })
-export class ReceitaPage {
-  valor: String;
-  receitaDB: AngularFireList<Receita>;
-  receita: Observable<Receita[]>;
+export class ObjetivoPage {
+  objetivoDB: AngularFireList<Objetivo>;
+  objetivo: Observable<Objetivo[]>;
+
 
   constructor(public db: AngularFireDatabase,
     public navCtrl: NavController,
@@ -22,21 +22,20 @@ export class ReceitaPage {
     public alertController: AlertController,
     public toast: ToastController, ) {
 
-    this.receitaDB = db.list<Receita>('receita');
+    this.objetivoDB = db.list<Objetivo>('objetivo');
 
-    this.receita = this.receitaDB.valueChanges();
+    this.objetivo = this.objetivoDB.valueChanges();
     //Deletar dado
-    this.receita = this.receitaDB.snapshotChanges().pipe(
+    this.objetivo = this.objetivoDB.snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
-    console.log(this.getAll());
   }
-
+ 
   async presentModal() {
     const modal = await this.modalController.create({
-      component: CadastroReceitaPage
+      component: CadastroObjetivoPage
     });
 
     modal.onDidDismiss()
@@ -47,12 +46,12 @@ export class ReceitaPage {
       });
     return await modal.present();
   }
-  private confirmAdd(receita: Receita) {
-    this.receitaDB.push(receita)
+  private confirmAdd(objetivo: Objetivo) {
+    this.objetivoDB.push(objetivo)
       .then(result => {
-        this.presentToast("Receita adicionada com sucesso.");
+        this.presentToast("Objetivo adicionado com sucesso.");
       }).catch(error => {
-        this.presentToast("Erro ao adicionar a receita.");
+        this.presentToast("Erro ao adicionar o objetivo.");
         console.log(error);
       });
   }
@@ -68,7 +67,7 @@ export class ReceitaPage {
   async deleteMensagem(key: string) {
     const alert = await this.alertController.create({
       header: 'Atenção',
-      message: 'Deseja apagar a receita? ',
+      message: 'Deseja apagar o objetivo? ',
       buttons: [
         {
           text: 'Cancelar',
@@ -85,22 +84,13 @@ export class ReceitaPage {
     await alert.present();
   }
   delete(key: string) {
-    this.receitaDB.remove(key)
+    this.objetivoDB.remove(key)
       .then(result => {
         this.presentToast("Receita removida com sucesso.");
       }).catch(error => {
         this.presentToast("Erro ao remover a receita.");
         console.log(error);
       });
-  }
-
-  getAll() {
-    return this.db.database.ref('receitas');
-    /*return this.receita = this.receitaDB.snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );*/
   }
 
 }

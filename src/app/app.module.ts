@@ -16,16 +16,18 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatInputModule} from '@angular/material/input';
-import {MatTableModule} from '@angular/material/table';
-import {FormsModule} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
- 
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
   entryComponents: [],
   imports: [
-BrowserModule,
+    BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -33,7 +35,8 @@ BrowserModule,
     AngularFireAuthModule,
     MatInputModule,
     MatTableModule,
-    FormsModule
+    MatToolbarModule,
+    FormsModule,
   ],
   providers: [
     StatusBar,

@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'home', redirectTo: '/tabs/home' },
   { path: 'receita', loadChildren: './receita/receita.module#ReceitaPageModule' },
   { path: 'despesa', loadChildren: './despesa/despesa.module#DespesaPageModule' },
-  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' }
+  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' },
+  { path: 'objetivo', loadChildren: './objetivo/objetivo.module#ObjetivoPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

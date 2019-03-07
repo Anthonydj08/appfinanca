@@ -33,6 +33,11 @@ export class AppComponent implements OnInit {
       title: 'Despesas',
       url: '/tabs/despesa',
       icon: 'trending-down'
+    },
+    {
+      title: 'Objetivos',
+      url: '/objetivo',
+      icon: 'checkbox-outline'
     }
   ];
 

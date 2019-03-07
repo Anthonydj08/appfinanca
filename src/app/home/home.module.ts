@@ -10,7 +10,7 @@ import { HomePage } from './home.page';
   IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: HomePage }])
+    RouterModule.forChild([{ path: '', component: HomePage }]),    
   ],
   declarations: [HomePage]
 })

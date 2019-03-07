@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Objetivos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+
+    <ion-card>
+      <ion-item>
+        <ion-icon (click)="deleteMensagem(objetivo.key)" color="danger" name="trash" slot="end"></ion-icon>
+        <ion-label>Viagem para Londres</ion-label>
+      </ion-item>
+      <ion-row align-items-center padding>
+        <ion-col size="1.5" offset="0.5" >
+          <img class="icone" src="../../assets/icon/target.png">
+        </ion-col>
+        <ion-col size="4">
+          <ion-label>Preciso</ion-label>
+          <ion-row>
+            <ion-label>R$10.000,00</ion-label>
+          </ion-row>
+        </ion-col>
+        <ion-col size="1.5" offset="0.5">
+          <img class="icone" src="../../assets/icon/pig.png">
+        </ion-col>
+        <ion-col size="4">
+          <ion-label>Tenho</ion-label>
+          <ion-row>
+            <ion-label>R$1.520,00</ion-label>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+    <ion-row justify-content-center align-items-center>
+      <ion-col size="12" align-self-center>
+        <ion-button strong="true" expand="block" (click)="presentModal()">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Adicionar objetivo
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

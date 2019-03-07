@@ -40,6 +40,7 @@
     "cordova-plugin-whitelist": "^1.3.3",
     "core-js": "^2.5.3",
     "firebase": "^5.8.4",
+    "hammerjs": "^2.0.8",
     "rxjs": "6.3.3",
     "shuffle-array": "^1.0.1",
     "zone.js": "^0.8.26"
