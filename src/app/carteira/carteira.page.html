@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>carteira</ion-title>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <ion-row align-items-center>
+    <ion-col size="1">
+      <ion-icon size="large" name="create"></ion-icon>
+    </ion-col>
+    <ion-col>
+      <ion-input placeholder="Digite o nome da carteira" type="text" [(ngModel)]="novaCarteira.nome"></ion-input>
+    </ion-col>
+  </ion-row>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button [disabled]="!novaCarteira.nome" class="submit-btn"
+      (click)="insert()" type="submit">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { DespesaPage } from './despesa.page';
 import { CadastroDespesaPage } from './../cadastro-despesa/cadastro-despesa.page';
 
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +23,9 @@ const routes: Routes = [
   CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatInputModule,
+    MatSelectModule
   ],
   declarations: [DespesaPage, CadastroDespesaPage],
   entryComponents: [CadastroDespesaPage]

@@ -58,6 +58,18 @@
         </ion-col>
       </ion-row>
 
+      <ion-row align-items-center>
+        <ion-col size="1">
+          <ion-icon size="large" name="wallet"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-select [(ngModel)]="novaDespesa.carteiraUID" placeholder="Carteira">
+            <ion-select-option *ngFor="let carteira of carteiraList" [value]="carteira.uid">{{carteira.nome}}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
     </ion-grid>
   </ion-list>
 

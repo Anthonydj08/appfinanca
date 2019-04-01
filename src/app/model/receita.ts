@@ -1,5 +1,5 @@
 export class Receita {
-    idReceita: String;
+    uid: string;
     nome: String;
     valor: number;
     data: String;

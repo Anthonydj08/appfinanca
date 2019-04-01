@@ -38,6 +38,11 @@ export class AppComponent implements OnInit {
       title: 'Objetivos',
       url: '/objetivo',
       icon: 'checkbox-outline'
+    },
+    {
+      title: 'Carteira',
+      url: '/carteira',
+      icon: 'wallet'
     }
   ];
 

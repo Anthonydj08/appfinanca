@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'despesa', loadChildren: './despesa/despesa.module#DespesaPageModule' },
   { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' },
   { path: 'objetivo', loadChildren: './objetivo/objetivo.module#ObjetivoPageModule' },
+  { path: 'carteira', loadChildren: './carteira/carteira.module#CarteiraPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

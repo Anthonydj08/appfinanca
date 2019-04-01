@@ -22,12 +22,13 @@ import { FormsModule } from '@angular/forms';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { DBService } from './services/db.service';
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
   entryComponents: [],
   imports: [
-    BrowserModule,
+
+  BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -44,6 +45,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LocalNotifications,
     AngularFireDatabase,
+    DBService
   ],
   bootstrap: [AppComponent]
 })
