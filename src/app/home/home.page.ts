@@ -27,14 +27,6 @@ export class HomePage {
     this.init();
   }
   private async init() {
-
-    // const user = firebase.auth().currentUser;
-    //   if(!user){
-    //     this.router.navigate(['/login']);
-    //   } else{
-        
-    //   }
-
     this.loading = true;
 
     this.dbService.listAndWatch('/despesa')

@@ -19,6 +19,7 @@ export class ReceitaPage {
   carteiraList: Carteira[];
   receitas: Receita[];
   loading: boolean;
+  loadingLista: boolean;
 
   constructor(public modalController: ModalController, private dbService: DBService, public toast: ToastController, public alertController: AlertController) {
     this.init();
@@ -26,10 +27,21 @@ export class ReceitaPage {
 
   private async init() {
     this.loading = true;
-    await this.loadCarteiraList();
-    await this.loadReceitas();
-  }
 
+    this.dbService.listAndWatch('/carteira')
+      .subscribe(data => this.initData());
+
+    this.dbService.listAndWatch('/receita')
+      .subscribe(data => this.initData());
+  }
+  private async initData() {
+    if (!this.loadingLista) {
+      this.loadingLista = true;
+      await this.loadCarteiraList();
+      await this.loadReceitas();
+      this.loadingLista = false;
+    }
+  }
   private async loadCarteiraList() {
     this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
   }

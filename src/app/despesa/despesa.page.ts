@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Despesa } from '../model/despesa';
-import { ToastController, AlertController, ModalController} from '@ionic/angular';
+import { ToastController, AlertController, ModalController } from '@ionic/angular';
 import { CadastroDespesaPage } from '../cadastro-despesa/cadastro-despesa.page';
 import { Carteira } from './../model/carteira';
 import { DBService } from './../services/db.service';
@@ -16,6 +16,7 @@ export class DespesaPage {
   despesas: Despesa[];
   despesa: Despesa;
   loading: boolean;
+  loadingLista: boolean;
 
   constructor(public modalController: ModalController, private dbService: DBService, public toast: ToastController, public alertController: AlertController) {
     this.init();
@@ -24,11 +25,23 @@ export class DespesaPage {
   private async init() {
     this.loading = true;
 
-    await this.loadCarteiraList();
-    await this.loadDespesas();
-    console.log(this.totalDespesas());
+
+    this.dbService.listAndWatch('/despesa')
+      .subscribe(data => this.initData());
+
+    this.dbService.listAndWatch('/carteira')
+      .subscribe(data => this.initData());
+
   }
 
+  private async initData() {
+    if (!this.loadingLista) {
+      this.loadingLista = true;
+      await this.loadCarteiraList();
+      await this.loadDespesas();
+      this.loadingLista = false;
+    }
+  }
   private async loadCarteiraList() {
     this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
   }
@@ -51,13 +64,7 @@ export class DespesaPage {
       despesa['carteiraText'] = despesaCarteira.nome;
     });
   }
-  private totalDespesas(){
-    let soma : any = 0;
-     for (let index = 0; index < this.despesas.length; index++) {
-       soma = soma + this.despesas[index].valor;
-     }
-     return soma;
-  }
+
 
   async add() {
     const modal = await this.modalController.create({

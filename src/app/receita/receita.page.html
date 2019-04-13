@@ -10,15 +10,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="loading">
-    <ion-grid>
-      <ion-row justify-content-center align-items-center>
-        <ion-spinner name="dots"></ion-spinner>
-        <ion-label> Carregando</ion-label>
-      </ion-row>
-    </ion-grid>
-  </div>
-  
+
+
   <ion-card *ngFor="let receita of receitas">
     <ion-item>
       <ion-icon (click)="deleteMensagem(receita.uid)" color="danger" name="trash" slot="end"></ion-icon>
@@ -38,6 +31,28 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
+
+  <ion-list *ngIf="loading">
+    <ion-card *ngFor="let receita of [0, 1, 2, 3]">
+      <ion-item>
+        <ion-icon color="danger" name="trash" slot="end"></ion-icon>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </ion-item>
+
+      <ion-card-content class="receita">
+        <ion-row>
+          <ion-col>
+            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+          </ion-col>
+          <ion-col align-self-end size="3">
+            <div text-end>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="add()">
