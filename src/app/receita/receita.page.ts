@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { NavController, ModalController, AlertController, ToastController } from '@ionic/angular';
+import { NavController, ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { Receita } from '../model/receita';
 import { map } from 'rxjs/operators';
 import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
+import { Carteira } from './../model/carteira';
+import { DBService } from './../services/db.service';
 
 @Component({
   selector: 'app-receita',
@@ -12,29 +14,45 @@ import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
   styleUrls: ['./receita.page.scss'],
 })
 export class ReceitaPage {
-  valor: String;
-  receitaDB: AngularFireList<Receita>;
-  receita: Observable<Receita[]>;
 
-  constructor(public db: AngularFireDatabase,
-    public navCtrl: NavController,
-    public modalController: ModalController,
-    public alertController: AlertController,
-    public toast: ToastController, ) {
 
-    this.receitaDB = db.list<Receita>('receita');
+  carteiraList: Carteira[];
+  receitas: Receita[];
+  loading: boolean;
 
-    this.receita = this.receitaDB.valueChanges();
-    //Deletar dado
-    this.receita = this.receitaDB.snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );
-    console.log(this.getAll());
+  constructor(public modalController: ModalController, private dbService: DBService, public toast: ToastController, public alertController: AlertController) {
+    this.init();
   }
 
-  async presentModal() {
+  private async init() {
+    this.loading = true;
+    await this.loadCarteiraList();
+    await this.loadReceitas();
+  }
+
+  private async loadCarteiraList() {
+    this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
+  }
+
+  private async loadReceitas() {
+    this.dbService.listWithUIDs<Receita>('/receita')
+      .then(receitas => {
+        this.receitas = receitas;
+        this.associateReceitaAndCarteira();
+        this.loading = false;
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+  private associateReceitaAndCarteira() {
+    this.receitas.forEach(Receita => {
+      const receitaCarteira = this.carteiraList.filter(a => a.uid === Receita.carteiraUID)[0];
+      Receita['carteiraText'] = receitaCarteira.nome;
+    });
+  }
+
+  async add() {
     const modal = await this.modalController.create({
       component: CadastroReceitaPage
     });
@@ -42,33 +60,22 @@ export class ReceitaPage {
     modal.onDidDismiss()
       .then(result => {
         if (result.data) {
-          this.confirmAdd(result.data);
+          this.confirmAdd();
         }
       });
+
     return await modal.present();
   }
-  private confirmAdd(receita: Receita) {
-    this.receitaDB.push(receita)
-      .then(result => {
-        this.presentToast("Receita adicionada com sucesso.");
-      }).catch(error => {
-        this.presentToast("Erro ao adicionar a receita.");
-        console.log(error);
-      });
+
+  private confirmAdd() {
+    this.presentToast('Receita adicionada com sucesso');
+    this.loadReceitas();
   }
 
-  async presentToast(mensagem: string) {
-    const toast = await this.toast.create({
-      message: mensagem,
-      duration: 3000,
-    });
-    toast.present();
-  }
-
-  async deleteMensagem(key: string) {
+  async deleteMensagem(uid: string) {
     const alert = await this.alertController.create({
       header: 'Atenção',
-      message: 'Deseja apagar a receita? ',
+      message: 'Deseja apagar a Receita? ',
       buttons: [
         {
           text: 'Cancelar',
@@ -77,30 +84,45 @@ export class ReceitaPage {
         {
           text: 'Confirmar',
           handler: () => {
-            this.delete(key);
+            this.remove(uid);
           }
         }
       ]
     });
     await alert.present();
   }
-  delete(key: string) {
-    this.receitaDB.remove(key)
-      .then(result => {
-        this.presentToast("Receita removida com sucesso.");
-      }).catch(error => {
-        this.presentToast("Erro ao remover a receita.");
-        console.log(error);
+
+  remove(uid: string) {
+    this.dbService.remove('/receita', uid)
+      .then(() => {
+        this.presentToast('Receita removida com sucesso');
+        this.loadReceitas();
       });
   }
 
-  getAll() {
-    return this.db.database.ref('receitas');
-    /*return this.receita = this.receitaDB.snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );*/
+  async presentToast(message: string) {
+    const toast = await this.toast.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
+  async edit(Receita: Receita) {
+    const modal = await this.modalController.create({
+      component: CadastroReceitaPage,
+      componentProps: {
+        editingReceita: Receita
+      }
+    });
+
+    modal.onDidDismiss()
+      .then(result => {
+        if (result.data) {
+          this.confirmAdd();
+        }
+      });
+
+    return await modal.present();
+  }
 }

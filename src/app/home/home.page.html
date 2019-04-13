@@ -17,7 +17,7 @@
       </div>
     </ion-row>
     <ion-row justify-content-center>
-      <ion-label class="saldo">R$1.130,00</ion-label>
+      <ion-label class="saldo">{{saldo | currency: "BRL"}}</ion-label>
     </ion-row>
   </ion-grid>
 
@@ -29,7 +29,7 @@
       <ion-col size="4" (click)="openReceita()">
         <ion-label>Receitas</ion-label>
         <ion-row>
-          <ion-label>R$10.524,25</ion-label>
+          <ion-label>{{totalReceita | currency: "BRL"}}</ion-label>
         </ion-row>
       </ion-col>
       <ion-col size="1.5" offset="0.5" (click)="openDespesa()">
@@ -38,7 +38,7 @@
       <ion-col size="4" (click)="openDespesa()">
         <ion-label>Despesas</ion-label>
         <ion-row>
-          <ion-label>R$5.452,25</ion-label>
+          <ion-label>{{totalDespesa | currency: "BRL"}}</ion-label>
         </ion-row>
       </ion-col>
     </ion-row>
@@ -48,34 +48,34 @@
     <ion-card-header>
       <ion-card-title>Movimentações do dia</ion-card-title>
     </ion-card-header>
-    <ion-grid *ngFor="let receita of receita | async">
+    <ion-grid *ngFor="let receita of receitas">
       <ion-row align-items-center>
         <ion-col size="1">
           <img src="../../assets/icon/trendingUp.png">
         </ion-col>
-        <ion-col size="8">
+        <ion-col size="7.5">
           <ion-label class="nomeReceita">{{receita.nome}}</ion-label>
           <ion-row align-items-end align-items-center>
             <ion-label>{{receita.categoria}}</ion-label>
           </ion-row>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="3.5">
           <ion-label class="esquerda">{{receita.valor | currency: "BRL"}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid *ngFor="let despesa of despesa | async">
+    <ion-grid *ngFor="let despesa of despesas">
       <ion-row align-items-center>
         <ion-col size="1">
           <img src="../../assets/icon/trendingDown.png">
         </ion-col>
-        <ion-col size="8">
+        <ion-col size="7.5">
           <ion-label class="nomeReceita">{{despesa.nome}}</ion-label>
           <ion-row align-items-end align-items-center>
             <ion-label>{{despesa.categoria}}</ion-label>
           </ion-row>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="3.5">
           <ion-label class="esquerda">-{{despesa.valor | currency: "BRL"}}</ion-label>
         </ion-col>
       </ion-row>

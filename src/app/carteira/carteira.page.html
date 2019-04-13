@@ -1,28 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>carteira</ion-title>
+    <ion-title>Carteira</ion-title>
     <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-list *ngFor="let carteira of carteiras">
+    <ion-item>
+      <ion-label>{{carteira.nome}}</ion-label>
+      <ion-icon (click)="deleteMensagem(carteira.uid)" color="danger" name="trash" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
 
 
-  <ion-row align-items-center>
-    <ion-col size="1">
-      <ion-icon size="large" name="create"></ion-icon>
-    </ion-col>
-    <ion-col>
-      <ion-input placeholder="Digite o nome da carteira" type="text" [(ngModel)]="novaCarteira.nome"></ion-input>
-    </ion-col>
-  </ion-row>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Nova Carteira</ion-card-title>
+    </ion-card-header>
 
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button [disabled]="!novaCarteira.nome" class="submit-btn"
-      (click)="insert()" type="submit">
-      <ion-icon name="checkmark"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-card-content>
+      <ion-row align-items-center>
+        <ion-col size="1">
+          <ion-icon size="large" name="create"></ion-icon>
+        </ion-col>
+        <ion-col size="9">
+          <ion-input placeholder="Digite o nome da carteira" type="text" [(ngModel)]="novaCarteira.nome"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-icon (click)="insert()" color="success" name="checkmark" size="large"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

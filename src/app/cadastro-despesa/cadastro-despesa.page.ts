@@ -11,39 +11,45 @@ import { DBService } from './../services/db.service';
 })
 export class CadastroDespesaPage implements OnInit {
 
-  editaDespesa: Despesa;
+  date: string;
+  editingDespesa: Despesa;
 
   novaDespesa: Despesa;
 
   carteiraList: Carteira[];
 
-  startDate = new Date().toISOString();
-  maxDate = new Date().toISOString();
-
   constructor(public modalController: ModalController, private dbService: DBService) {
     this.novaDespesa = new Despesa();
     this.loadCarteiraList();
+    this.date = new Date().toISOString();
   }
 
-  ngOnInit() {
-    if (this.editaDespesa) {
-      this.novaDespesa = this.editaDespesa;
-    }
-  }
-  private async loadCarteiraList() {
-    this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
-}
-
-  customAlertOptions: any = {
+  customAlertCategoria: any = {
     header: 'Categorias',
     mode: 'ios',
   };
+  customAlertCarteira: any = {
+    header: 'Carteiras',
+    mode: 'ios',
+  };
+
+  ngOnInit() {
+    if (this.editingDespesa) {
+      this.novaDespesa = this.editingDespesa;
+    }
+  }
+
+  private async loadCarteiraList() {
+    this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
+  }
 
   voltar() {
     this.modalController.dismiss();
   }
+
   salvar() {
-    if (this.editaDespesa) {
+    this.novaDespesa.data = new Date(this.date).getDate();
+    if (this.editingDespesa) {
       this.editar();
     } else {
       this.inserir();
@@ -52,7 +58,7 @@ export class CadastroDespesaPage implements OnInit {
 
   private editar() {
     const updatingObject = { nome: this.novaDespesa.nome, categoria: this.novaDespesa.categoria, valor: this.novaDespesa.valor, data: this.novaDespesa.data, carteiraUID: this.novaDespesa.carteiraUID };
-    this.dbService.update('/despesa', updatingObject)
+    this.dbService.update('/despesa', this.novaDespesa.uid, updatingObject)
       .then(() => {
         this.modalController.dismiss(this.novaDespesa);
       }).catch(error => {
@@ -68,5 +74,4 @@ export class CadastroDespesaPage implements OnInit {
         console.log(error);
       });
   }
-
 }

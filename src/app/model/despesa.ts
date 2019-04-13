@@ -2,7 +2,7 @@ export class Despesa {
     uid: string;
     nome: String;
     valor: number;
-    data: String;
+    data: number;
     categoria:String;
     carteiraUID:String;
 };

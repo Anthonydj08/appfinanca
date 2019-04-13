@@ -15,11 +15,6 @@ import * as firebase from 'firebase/app';
 export class AppComponent implements OnInit {
   pages = [
     {
-      title: 'Login',
-      url: '/login',
-      icon: 'log-in'
-    },
-    {
       title: 'Home',
       url: '/tabs/home',
       icon: 'home'
@@ -59,10 +54,10 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    console.log(firebase.auth().currentUser.email);
+    //console.log(firebase.auth().currentUser.email);
     firebase.auth().signOut();
-
-    console.log("teste");
+    this.router.navigate(['/login']);
+    //console.log("teste");
   };
 
   ngOnInit() {
@@ -90,8 +85,8 @@ export class AppComponent implements OnInit {
           id: index,
           text: message,
           trigger: {
-            in: index * 2,
-            unit: ELocalNotificationTriggerUnit.SECOND,
+            in: index * 1,
+            unit: ELocalNotificationTriggerUnit.DAY,
           }
         })
       })

@@ -10,14 +10,22 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-card *ngFor="let receita of receita | async">
+  <div *ngIf="loading">
+    <ion-grid>
+      <ion-row justify-content-center align-items-center>
+        <ion-spinner name="dots"></ion-spinner>
+        <ion-label> Carregando</ion-label>
+      </ion-row>
+    </ion-grid>
+  </div>
+  
+  <ion-card *ngFor="let receita of receitas">
     <ion-item>
-      <ion-icon (click)="deleteMensagem(receita.key)" color="danger" name="trash" slot="end"></ion-icon>
-      <ion-label>{{receita.nome}}</ion-label>
+      <ion-icon (click)="deleteMensagem(receita.uid)" color="danger" name="trash" slot="end"></ion-icon>
+      <ion-label> {{receita.nome}}</ion-label>
     </ion-item>
 
-    <ion-card-content>
+    <ion-card-content class="receita" (click)="edit(receita)">
       <ion-row>
         <ion-col>
           <ion-label>{{receita.valor | currency: 'R$'}}</ion-label>
@@ -32,7 +40,7 @@
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="presentModal()">
+    <ion-fab-button (click)="add()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

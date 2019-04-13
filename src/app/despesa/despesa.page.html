@@ -10,17 +10,26 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let despesa of despesas" (click)="edit(despesa)">
+  <div *ngIf="loading">
+    <ion-grid>
+      <ion-row justify-content-center align-items-center>
+        <ion-spinner name="dots"></ion-spinner>
+        <ion-label> Carregando</ion-label>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-card *ngFor="let despesa of despesas">
     <ion-item>
-      <ion-icon (click)="remove(despesa.uid)" color="danger" name="trash" slot="end"></ion-icon>
+      <ion-icon (click)="deleteMensagem(despesa.uid)" color="danger" name="trash" slot="end"></ion-icon>
       <ion-label>{{despesa.nome}}</ion-label>
     </ion-item>
-    <ion-card-content>
+    <ion-card-content class="despesa" (click)="edit(despesa)">
       <ion-row>
         <ion-col>
           <ion-label>{{despesa.valor | currency: 'R$'}}</ion-label>
         </ion-col>
-        <ion-col align-self-end size="3" >
+        <ion-col align-self-end size="3">
           <div text-end>
             <ion-label>{{despesa.data | date: 'dd/MM'}}</ion-label>
           </div>

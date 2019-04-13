@@ -1,77 +1,80 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Nova despesa</ion-title>
+    <div *ngIf="!editingDespesa">
+      <ion-title>Nova despesa</ion-title>
+    </div>
+    <div *ngIf="editingDespesa">
+        <ion-title>Editar despesa</ion-title>
+      </div>
     <ion-buttons slot="start">
       <ion-button (click)="voltar()">
-        <ion-back-button defaultHref="/"></ion-back-button>
+        <ion-back-button defaultHref="/tabs/despesa"></ion-back-button>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list insert>
-    <ion-grid>
-      <ion-row align-items-center>
-        <ion-col size="1">
-          <ion-icon size="large" name="logo-usd"></ion-icon>
-        </ion-col>
-        <ion-col size="8">
-          <ion-input class="valor" placeholder="0,00" type="number" [(ngModel)]="novaDespesa.valor">
-          </ion-input>
-        </ion-col>
-      </ion-row>
+  <ion-grid>
+    <ion-row align-items-center>
+      <ion-col size="1.25">
+        <ion-icon size="large" name="logo-usd"></ion-icon>
+      </ion-col>
+      <ion-col size="8">
+        <ion-input class="valor" placeholder="0,00" type="number" [(ngModel)]="novaDespesa.valor">
+        </ion-input>
+      </ion-col>
+    </ion-row>
 
-      <ion-row align-items-center>
-        <ion-col size="1">
-          <ion-icon size="large" name="create"></ion-icon>
-        </ion-col>
-        <ion-col>
-          <ion-input placeholder="Digite o nome da despesa" type="text" [(ngModel)]="novaDespesa.nome"></ion-input>
-        </ion-col>
-      </ion-row>
+    <ion-row align-items-center>
+      <ion-col size="1.25">
+        <ion-icon size="large" name="create"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-input placeholder="Digite o nome da despesa" type="text" [(ngModel)]="novaDespesa.nome"></ion-input>
+      </ion-col>
+    </ion-row>
 
-      <ion-row align-items-center>
-        <ion-col size="1">
-          <ion-icon size="large" name="pricetag"></ion-icon>
-        </ion-col>
-        <ion-col>
-          <ion-select [interfaceOptions]="customAlertOptions" interface="alert" cancelText="Cancelar"
-            [(ngModel)]="novaDespesa.categoria" placeholder="Categoria">
-            <ion-select-option value="Comida">Comida</ion-select-option>
-            <ion-select-option value="Lazer">Lazer</ion-select-option>
-            <ion-select-option value="Comida">Comida</ion-select-option>
-            <ion-select-option value="Educação">Educação</ion-select-option>
-            <ion-select-option value="Casa">Casa</ion-select-option>
-            <ion-select-option value="Outros">Outros</ion-select-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
+    <ion-row align-items-center>
+      <ion-col size="1">
+        <ion-icon size="large" name="pricetag"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-select [interfaceOptions]="customAlertCategoria" interface="alert" cancelText="Cancelar"
+          [(ngModel)]="novaDespesa.categoria" placeholder="Categoria">
+          <ion-select-option value="Comida">Comida</ion-select-option>
+          <ion-select-option value="Lazer">Lazer</ion-select-option>
+          <ion-select-option value="Educação">Educação</ion-select-option>
+          <ion-select-option value="Casa">Casa</ion-select-option>
+          <ion-select-option value="Outros">Outros</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
 
-      <ion-row align-items-center>
-        <ion-col size="1">
-          <ion-icon size="large" name="calendar"></ion-icon>
-        </ion-col>
-        <ion-col>
-          <ion-datetime display-format="DD/MM/YYYY" [min]="minDate" [(ngModel)]="startDate"
-            [(ngModel)]="novaDespesa.data"></ion-datetime>
-        </ion-col>
-      </ion-row>
+    <ion-row align-items-center>
+      <ion-col size="1">
+        <ion-icon size="large" name="calendar"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-datetime display-format="DD/MM/YYYY"
+          [(ngModel)]="date"></ion-datetime>
+      </ion-col>
+    </ion-row>
 
-      <ion-row align-items-center>
-        <ion-col size="1">
-          <ion-icon size="large" name="wallet"></ion-icon>
-        </ion-col>
-        <ion-col>
-          <ion-select [(ngModel)]="novaDespesa.carteiraUID" placeholder="Carteira">
-            <ion-select-option *ngFor="let carteira of carteiraList" [value]="carteira.uid">{{carteira.nome}}
-            </ion-select-option>
-          </ion-select>
-        </ion-col>
-      </ion-row>
+    <ion-row align-items-center>
+      <ion-col size="1">
+        <ion-icon size="large" name="wallet"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-select [(ngModel)]="novaDespesa.carteiraUID" [interfaceOptions]="customAlertCarteira"
+          placeholder="Carteira">
+          <ion-select-option *ngFor="let carteira of carteiraList" [value]="carteira.uid">{{carteira.nome}}
+          </ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
 
-    </ion-grid>
-  </ion-list>
+  </ion-grid>
 
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button [disabled]="!novaDespesa.valor || !novaDespesa.nome || !novaDespesa.categoria " class="submit-btn"

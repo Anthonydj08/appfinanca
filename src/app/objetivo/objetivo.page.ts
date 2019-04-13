@@ -5,6 +5,7 @@ import { Objetivo } from '../model/objetivo';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CadastroObjetivoPage } from './../cadastro-objetivo/cadastro-objetivo.page';
+import { DBService } from './../services/db.service';
 
 @Component({
   selector: 'app-objetivo',
@@ -12,6 +13,111 @@ import { CadastroObjetivoPage } from './../cadastro-objetivo/cadastro-objetivo.p
   styleUrls: ['./objetivo.page.scss'],
 })
 export class ObjetivoPage {
+  
+  objetivos: Objetivo[];
+  loading: boolean;
+
+  constructor(public modalController: ModalController, private dbService: DBService, public toast: ToastController, public alertController: AlertController) {
+    this.init();
+  }
+
+  private async init() {
+    this.loading = true;
+    await this.loadObjetivos();
+  }
+
+  private async loadObjetivos() {
+    this.dbService.listWithUIDs<Objetivo>('/objetivo')
+      .then(objetivos => {
+        this.objetivos = objetivos;
+        this.loading = false;
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+  
+
+  async add() {
+    const modal = await this.modalController.create({
+      component: CadastroObjetivoPage
+    });
+
+    modal.onDidDismiss()
+      .then(result => {
+        if (result.data) {
+          this.confirmAdd();
+        }
+      });
+
+    return await modal.present();
+  }
+
+  private confirmAdd() {
+    this.presentToast('Objetivo adicionado com sucesso');
+    this.loadObjetivos();
+  }
+
+  async deleteMensagem(uid: string) {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      message: 'Deseja apagar a Objetivo? ',
+      buttons: [
+        {
+          text: 'Cancelar',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            this.remove(uid);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  remove(uid: string) {
+    this.dbService.remove('/objetivo', uid)
+      .then(() => {
+        this.presentToast('Objetivo removido com sucesso');
+        this.loadObjetivos();
+      });
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toast.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async edit(Objetivo: Objetivo) {
+    const modal = await this.modalController.create({
+      component: CadastroObjetivoPage,
+      componentProps: {
+        editingObjetivo: Objetivo
+      }
+    });
+
+    modal.onDidDismiss()
+      .then(result => {
+        if (result.data) {
+          this.confirmAdd();
+        }
+      });
+
+    return await modal.present();
+  }
+ 
+ 
+ 
+ 
+ 
+ 
+  /*
   objetivoDB: AngularFireList<Objetivo>;
   objetivo: Observable<Objetivo[]>;
 
@@ -92,5 +198,5 @@ export class ObjetivoPage {
         console.log(error);
       });
   }
-
+*/
 }

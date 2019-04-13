@@ -93,8 +93,8 @@ export class DBService {
         });
     }
 
-    update(path: string, object): Promise<void> {
-        return this.db.object(path).update(object);
+    update(path: string, uid, object): Promise<void> {
+        return this.db.object(path + '/' + uid).update(object);
     }
 
     remove(path: string, uid: string): Promise<void> {

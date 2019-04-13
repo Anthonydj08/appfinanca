@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 
 import { AngularFireModule } from 'angularfire2';
-import { environment } from './../../../testeFire/src/environments/environment';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,17 +23,21 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DBService } from './services/db.service';
+
+import { BrMaskerModule } from 'br-mask';
+
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
   entryComponents: [],
   imports: [
-
-  BrowserModule,
+    BrMaskerModule,
+    BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireAuth,
     MatInputModule,
     MatTableModule,
     MatToolbarModule,
@@ -45,7 +49,7 @@ import { DBService } from './services/db.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LocalNotifications,
     AngularFireDatabase,
-    DBService
+    DBService,
   ],
   bootstrap: [AppComponent]
 })

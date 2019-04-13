@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Receita } from '../model/receita';
+import { Carteira } from './../model/carteira';
+import { DBService } from './../services/db.service';
 
 @Component({
   selector: 'app-cadastro-receita',
@@ -9,27 +11,100 @@ import { Receita } from '../model/receita';
 })
 export class CadastroReceitaPage {
 
-  novaReceita: Receita;
-  constructor(public modalController: ModalController) {
-    this.novaReceita = new Receita();
-  }
-  
-  startDate = new Date().toISOString();
-  maxDate = new Date().toISOString();
+  date: string;
 
-  customAlertOptions: any = {
+  editingReceita: Receita;
+
+  novaReceita: Receita;
+
+  carteiraList: Carteira[];
+
+  constructor(public modalController: ModalController, private dbService: DBService) {
+    this.novaReceita = new Receita();
+    this.loadCarteiraList();
+    this.date = new Date().toISOString();
+  }
+
+  customAlertCategoria: any = {
     header: 'Categorias',
     mode: 'ios',
   };
+  customAlertCarteira: any = {
+    header: 'Carteiras',
+    mode: 'ios',
+  };
+
+  ngOnInit() {
+    if (this.editingReceita) {
+      this.novaReceita = this.editingReceita;
+    }
+  }
+
+  private async loadCarteiraList() {
+    this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
+  }
 
   voltar() {
     this.modalController.dismiss();
   }
+
   salvar() {
-    if (!this.novaReceita.data) {
-      this.novaReceita.data = this.startDate;
-    } 
-    this.modalController.dismiss(this.novaReceita);
-    this.novaReceita = new Receita();
+    this.novaReceita.data = new Date(this.date).getTime();
+    if (this.editingReceita) {
+      this.editar();
+    } else {
+      this.inserir();
+    }
   }
+
+  private editar() {
+    const updatingObject = { nome: this.novaReceita.nome, categoria: this.novaReceita.categoria, valor: this.novaReceita.valor, data: this.novaReceita.data, carteiraUID: this.novaReceita.carteiraUID };
+    this.dbService.update('/receita', this.novaReceita.uid, updatingObject)
+      .then(() => {
+        this.modalController.dismiss(this.novaReceita);
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+  private inserir() {
+    this.dbService.insertInList<Receita>('/receita', this.novaReceita)
+      .then(() => {
+        this.modalController.dismiss(this.novaReceita);
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+
+
+
+
+  /*
+  
+  
+  
+    novaReceita: Receita;
+    constructor(public modalController: ModalController) {
+      this.novaReceita = new Receita();
+    }
+    
+    startDate = new Date().toISOString();
+    maxDate = new Date().toISOString();
+  
+    customAlertOptions: any = {
+      header: 'Categorias',
+      mode: 'ios',
+    };
+  
+    voltar() {
+      this.modalController.dismiss();
+    }
+    salvar() {
+      if (!this.novaReceita.data) {
+        this.novaReceita.data = this.startDate;
+      } 
+      this.modalController.dismiss(this.novaReceita);
+      this.novaReceita = new Receita();
+    }*/
 }
