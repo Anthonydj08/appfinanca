@@ -47,17 +47,15 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private router: Router,
     private localNotifications: LocalNotifications,
-    private fAuth: AngularFireAuth,
 
   ) {
     this.initializeApp();
   }
 
   logout() {
-    //console.log(firebase.auth().currentUser.email);
+
     firebase.auth().signOut();
     this.router.navigate(['/login']);
-    //console.log("teste");
   };
 
   ngOnInit() {

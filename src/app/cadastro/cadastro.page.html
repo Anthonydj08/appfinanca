@@ -10,13 +10,13 @@
     </ion-row>
     <img class="appIcon" src="../../assets/icon/icon.png" alt="logo app">
     <ion-row>
-      <ion-input [(ngModel)]="novoUsuario.nome" placeholder="Digite o seu nome"></ion-input>
+      <ion-input [(ngModel)]="usuarioCadastro.nome" placeholder="Digite o seu nome"></ion-input>
     </ion-row>
     <ion-row>
-      <ion-input [(ngModel)]="email" placeholder="Digite o seu e-mail"></ion-input>
+      <ion-input [(ngModel)]="usuarioCadastro.email" type="email" placeholder="Digite o seu e-mail"></ion-input>
     </ion-row>
     <ion-row>
-      <ion-input [(ngModel)]="password" placeholder="Digite a sua senha"></ion-input>
+      <ion-input [(ngModel)]="usuarioCadastro.senha" type="password" placeholder="Digite a sua senha"></ion-input>
     </ion-row>
   </ion-grid>
 

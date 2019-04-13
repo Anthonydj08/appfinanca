@@ -12,7 +12,7 @@ import { MenuItemComponent } from './components/menu-item/menu-item.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,7 +37,6 @@ import { BrMaskerModule } from 'br-mask';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireAuth,
     MatInputModule,
     MatTableModule,
     MatToolbarModule,

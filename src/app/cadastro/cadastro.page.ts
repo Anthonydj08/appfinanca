@@ -1,50 +1,63 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Profile } from 'selenium-webdriver/firefox';
 
 import * as firebase from 'firebase/app';
 import { DBService } from './../services/db.service';
 import { Usuario } from '../model/usuario';
+import { AuthService } from './../services/auth.service';
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
 })
-export class CadastroPage implements OnInit {
-  email: string;
-  password: string;
-  novoUsuario: Usuario;
+export class CadastroPage {
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, public toastController: ToastController, public afDatabase: AngularFireDatabase, public dbService: DBService) { 
-    this.novoUsuario = new Usuario();
+
+  private loading: any;
+  public usuarioCadastro: Usuario = {};
+
+  constructor(private router: Router,
+    private afAuth: AngularFireAuth,
+    public toastController: ToastController,
+    public afDatabase: AngularFireDatabase,
+    public dbService: DBService,
+    public loadingController: LoadingController,
+    public authService: AuthService,
+  ) {
+    this.usuarioCadastro = new Usuario();
   }
 
-  ngOnInit() {
-  }
+  
+  async register() {
+    await this.presentLoading();
 
-  register() {
-    this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
-      .then(result => {
-        this.novoUsuario.uid = result.user.uid;
-        this.dbService.insertInList<Usuario>('/usuario', this.novoUsuario)
-          .then(() => {
-            this.presentToast('Usuário criado com sucesso');
-            this.backToLogin();
-          }).catch(error => {
-            console.log(error);
-          });
-      })
-      .catch(error => {
-        this.presentToast('Erro ao cadastrar usuário');
-        console.log(error);
-      });
-  }
+    try {
+      await this.authService.register(this.usuarioCadastro);
+      this.usuarioCadastro.email = null;
+      this.usuarioCadastro.senha = null;
+      this.usuarioCadastro.uid = this.afAuth.auth.currentUser.uid;
+      this.dbService.insertInList<Usuario>('/usuario', this.usuarioCadastro)
+    } catch (error) {
+      let message: string;
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          message = 'E-mail em uso.'
+          break;
 
-  profile = {} as Profile;
+        case 'auth/invalid-email':
+          message = 'E-mail inválido.'
+          break;
+      }
+      this.presentToast(message);
+
+    } finally {
+      this.loading.dismiss();
+    }
+  }
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -52,6 +65,16 @@ export class CadastroPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      message: 'Carregando',
+      translucent: false,
+      spinner: "dots",
+      mode: "ios",
+    });
+    return this.loading.present();
   }
 
   backToLogin() {
