@@ -44,8 +44,16 @@ export class LoginPage implements OnInit, OnDestroy {
     try {
       await this.authService.loginGoogle();
     } catch (error) {
-      console.log(error.message);
-      this.presentToast(error.message);
+      console.log(error);
+      let message: string;
+      switch (error.code) {
+        case 'auth/popup-closed-by-user':
+          message = 'Operação cancelada pelo usuário.'
+          break;
+        
+      }
+      this.presentToast(message);
+
     } finally {
       this.loading.dismiss();
     }
@@ -57,13 +65,47 @@ export class LoginPage implements OnInit, OnDestroy {
     try {
       await this.authService.login(this.usuarioLogin);
     } catch (error) {
-      console.log(error.message);
-      this.presentToast('E-mail e/ou senha inválido(s).');
+      console.log(error);
+      let message: string;
+      switch (error.code) {
+        case 'auth/argument-error':
+          message = 'Digite um e-mail e senha'
+          break;
+        case 'auth/invalid-email':
+          message = 'E-mail inválido.';
+          break;
+        case 'auth/wrong-password':
+          message = 'Senha inválida.'
+      }
+      this.presentToast(message);
+
     } finally {
       this.loading.dismiss();
     }
   }
+  async senha() {
+    await this.presentLoading();
 
+    try {
+      this.authService.senha(this.usuarioLogin);
+      this.presentToast('Um E-mail foi enviado para ' + this.usuarioLogin.email);
+    } catch (error) {
+      console.log(error);
+      let message: string;
+      switch (error.code) {
+        case 'auth/argument-error':
+          message = 'E-mail inválido.'
+          break;
+        case 'auth/user-not-found':
+          message = 'Usuario não encontrado';
+          break;
+      }
+      this.presentToast(message);
+    }
+    finally {
+      this.loading.dismiss();
+    }
+  }
   async presentLoading() {
     this.loading = await this.loadingController.create({
       message: 'Carregando',
@@ -83,7 +125,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   irCadastro() {
-    this.router.navigateByUrl('/cadastro');
+    this.router.navigate(['/cadastro']);
   }
 
   ngOnInit() {

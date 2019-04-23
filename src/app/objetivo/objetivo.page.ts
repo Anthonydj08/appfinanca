@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { NavController, ModalController, AlertController, ToastController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { Objetivo } from '../model/objetivo';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { CadastroObjetivoPage } from './../cadastro-objetivo/cadastro-objetivo.page';
 import { DBService } from './../services/db.service';
 
@@ -13,7 +10,7 @@ import { DBService } from './../services/db.service';
   styleUrls: ['./objetivo.page.scss'],
 })
 export class ObjetivoPage {
-  
+
   objetivos: Objetivo[];
   loading: boolean;
 
@@ -35,8 +32,6 @@ export class ObjetivoPage {
         console.log(error);
       });
   }
-
-  
 
   async add() {
     const modal = await this.modalController.create({
@@ -111,12 +106,12 @@ export class ObjetivoPage {
 
     return await modal.present();
   }
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
   /*
   objetivoDB: AngularFireList<Objetivo>;
   objetivo: Observable<Objetivo[]>;
