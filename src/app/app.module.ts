@@ -25,6 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { DBService } from './services/db.service';
 
 import { BrMaskerModule } from 'br-mask';
+
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
   entryComponents: [],
@@ -39,7 +40,7 @@ import { BrMaskerModule } from 'br-mask';
     MatInputModule,
     MatTableModule,
     MatToolbarModule,
-    FormsModule,
+    FormsModule
   ],
   providers: [
     StatusBar,

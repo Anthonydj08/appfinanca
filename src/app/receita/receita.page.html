@@ -12,7 +12,7 @@
 <ion-content>
 
 
-  <ion-card *ngFor="let receita of receitas">
+  <ion-card *ngFor="let receita of receitas | orderBy: '-data'">
     <ion-item>
       <ion-icon (click)="deleteMensagem(receita.uid)" color="danger" name="trash" slot="end"></ion-icon>
       <ion-label> {{receita.nome}}</ion-label>
@@ -53,6 +53,11 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
+
+  <div *ngIf="receitas.length == 0" class="semDados">
+    <img src="../../assets/ilustracao/noData.png" alt="noData">
+    <ion-label>Você ainda não registrou nenhuma receita</ion-label>
+  </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="add()">

@@ -1,8 +1,5 @@
 <ion-header no-border>
   <ion-toolbar>
-    <ion-title>
-
-    </ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -20,10 +17,10 @@
       <ion-label class="saldo">{{saldo | currency: "BRL"}}</ion-label>
     </ion-row>
   </ion-grid>
-
+<div class="receitaDespesa">
   <ion-grid padding>
     <ion-row align-items-center>
-      <ion-col size="1.5"  offset="0.5" (click)="openReceita()">
+      <ion-col size="1.5" offset="0.5" (click)="openReceita()">
         <img class="icone" src="../../assets/icon/trendingUp2.png">
       </ion-col>
       <ion-col size="4" (click)="openReceita()">
@@ -43,44 +40,37 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
+</div>
   <ion-card style="margin-top: 0px;">
     <ion-card-header>
-      <ion-card-title>Movimentações do dia</ion-card-title>
+      <ion-card-title>Últimas movimentações</ion-card-title>
     </ion-card-header>
-    <ion-grid *ngFor="let receita of receitas">
+    <ion-grid *ngFor="let movimento of movimentos | orderBy: '-data' | slice:0:5">
       <ion-row align-items-center>
         <ion-col size="1">
-          <img src="../../assets/icon/trendingUp.png">
+          <div *ngIf="movimento.tipo == 'receita'">
+            <img src="../../assets/icon/trendingUp.png">
+          </div>
+          <div *ngIf="movimento.tipo == 'despesa'">
+            <img src="../../assets/icon/trendingDown.png">
+          </div>
         </ion-col>
         <ion-col size="7.5">
-          <ion-label class="nomeReceita">{{receita.nome}}</ion-label>
+          <ion-label class="nomeReceita">{{movimento.nome}}</ion-label>
           <ion-row align-items-end align-items-center>
-            <ion-label>{{receita.categoria}}</ion-label>
+            <ion-label>{{movimento.data | date: 'dd/MMM' }}</ion-label>
           </ion-row>
         </ion-col>
         <ion-col size="3.5">
-          <ion-label class="esquerda">{{receita.valor | currency: "BRL"}}</ion-label>
+          <ion-label class="esquerda">{{movimento.valor | currency: "BRL"}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid *ngFor="let despesa of despesas">
-      <ion-row align-items-center>
-        <ion-col size="1">
-          <img src="../../assets/icon/trendingDown.png">
-        </ion-col>
-        <ion-col size="7.5">
-          <ion-label class="nomeReceita">{{despesa.nome}}</ion-label>
-          <ion-row align-items-end align-items-center>
-            <ion-label>{{despesa.categoria}}</ion-label>
-          </ion-row>
-        </ion-col>
-        <ion-col size="3.5">
-          <ion-label class="esquerda">-{{despesa.valor | currency: "BRL"}}</ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+
   </ion-card>
+
+
+
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>

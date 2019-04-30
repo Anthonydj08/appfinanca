@@ -1,4 +1,5 @@
 export class Carteira  {
     uid: string;
-    nome: String;
+    nome: string;
+    usuarioEmail:string;
 };

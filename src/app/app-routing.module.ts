@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'home', redirectTo: '/tabs/home', canActivate: [AuthGuard] },
   { path: 'receita', loadChildren: './receita/receita.module#ReceitaPageModule', canActivate: [AuthGuard] },
   { path: 'despesa', loadChildren: './despesa/despesa.module#DespesaPageModule', canActivate: [AuthGuard] },
-  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule', canActivate: [AuthGuard] },
+  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule', canActivate: [LoginGuard] },
   { path: 'objetivo', loadChildren: './objetivo/objetivo.module#ObjetivoPageModule', canActivate: [AuthGuard] },
   { path: 'carteira', loadChildren: './carteira/carteira.module#CarteiraPageModule', canActivate: [AuthGuard] },
 ];

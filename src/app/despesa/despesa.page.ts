@@ -4,6 +4,7 @@ import { ToastController, AlertController, ModalController } from '@ionic/angula
 import { CadastroDespesaPage } from '../cadastro-despesa/cadastro-despesa.page';
 import { Carteira } from './../model/carteira';
 import { DBService } from './../services/db.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-despesa',
@@ -17,8 +18,13 @@ export class DespesaPage {
   despesa: Despesa;
   loading: boolean;
   loadingLista: boolean;
+  emailUsuario: String;
 
-  constructor(public modalController: ModalController, private dbService: DBService, public toast: ToastController, public alertController: AlertController) {
+  constructor(public modalController: ModalController,
+    private dbService: DBService,
+    public toast: ToastController,
+    public alertController: AlertController,
+    private afAuth: AngularFireAuth, ) {
     this.init();
   }
 
@@ -37,19 +43,20 @@ export class DespesaPage {
   private async initData() {
     if (!this.loadingLista) {
       this.loadingLista = true;
+      this.emailUsuario = this.afAuth.auth.currentUser.email;
       await this.loadCarteiraList();
       await this.loadDespesas();
       this.loadingLista = false;
     }
   }
   private async loadCarteiraList() {
-    this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
+    this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
   }
 
-  private async loadDespesas() {
+  private async loadDespesas() {    
     await this.dbService.listWithUIDs<Despesa>('/despesa')
       .then(despesas => {
-        this.despesas = despesas;
+        this.despesas = despesas.filter(d => this.carteiraList.some(c => c.uid === d.carteiraUID));
         this.associateDespesaAndCarteira();
         this.loading = false;
       }).catch(error => {
@@ -64,7 +71,6 @@ export class DespesaPage {
       despesa['carteiraText'] = despesaCarteira.nome;
     });
   }
-
 
   async add() {
     const modal = await this.modalController.create({

@@ -5,6 +5,8 @@ import { Despesa } from '../model/despesa';
 import { DBService } from '../services/db.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { timingSafeEqual } from 'crypto';
+import { Carteira } from '../model/carteira';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +17,15 @@ import * as firebase from 'firebase/app';
 export class HomePage {
   despesas: Despesa[];
   receitas: Receita[];
+  carteiraList: Carteira[];
   loading: boolean;
   totalReceita: number = 0;
   totalDespesa: number = 0;
   saldo: number = 0;
 
+  movimentos: any[];
   loadingLista: boolean;
+  emailUsuario: String;
 
   data = new Date().getDate();
   constructor(public router: Router, private dbService: DBService, private fAuth: AngularFireAuth) {
@@ -40,28 +45,36 @@ export class HomePage {
   private async initData() {
     if (!this.loadingLista) {
       this.loadingLista = true;
+      this.emailUsuario = this.fAuth.auth.currentUser.email;
+      await this.loadCarteiraList();
       await this.loadDespesas();
       await this.loadReceitas();
       await this.totalDespesas();
       await this.totalReceitas();
       await this.totalSaldo();
+      this.movimentos = this.despesas.concat(this.receitas);      
       this.loadingLista = false;
     }
   }
 
-  private async loadDespesas() {
-    await this.dbService.listWithUIDs<Despesa>('/despesa')
-      .then(despesas => {
-        this.despesas = despesas;
+  private async loadCarteiraList() {
+    this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
+  }
+
+  private async loadReceitas() {    
+    await this.dbService.listWithUIDs<Receita>('/receita')
+      .then(receitas => {
+        this.receitas = receitas.filter(d => this.carteiraList.some(c => c.uid === d.carteiraUID));
         this.loading = false;
       }).catch(error => {
         console.log(error);
       });
   }
-  private async loadReceitas() {
-    await this.dbService.listWithUIDs<Receita>('/receita')
-      .then(receitas => {
-        this.receitas = receitas;
+
+  private async loadDespesas() {    
+    await this.dbService.listWithUIDs<Despesa>('/despesa')
+      .then(despesas => {
+        this.despesas = despesas.filter(d => this.carteiraList.some(c => c.uid === d.carteiraUID));
         this.loading = false;
       }).catch(error => {
         console.log(error);

@@ -3,6 +3,7 @@ import { Despesa } from '../model/despesa';
 import { ModalController } from '@ionic/angular';
 import { Carteira } from '../model/carteira';
 import { DBService } from './../services/db.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-cadastro-despesa',
@@ -13,13 +14,14 @@ export class CadastroDespesaPage implements OnInit {
 
   date: string;
   editingDespesa: Despesa;
-
   novaDespesa: Despesa;
-
   carteiraList: Carteira[];
+  emailUsuario: string;
 
-  constructor(public modalController: ModalController, private dbService: DBService) {
+  constructor(public modalController: ModalController, private dbService: DBService, private afAuth: AngularFireAuth, ) {
     this.novaDespesa = new Despesa();
+    this.novaDespesa.tipo = "despesa";
+    this.emailUsuario = this.afAuth.auth.currentUser.email;
     this.loadCarteiraList();
     this.date = new Date().toISOString();
   }
@@ -40,7 +42,7 @@ export class CadastroDespesaPage implements OnInit {
   }
 
   private async loadCarteiraList() {
-    this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
+    this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
   }
 
   voltar() {
@@ -48,7 +50,7 @@ export class CadastroDespesaPage implements OnInit {
   }
 
   salvar() {
-    this.novaDespesa.data = new Date(this.date).getDate();
+    this.novaDespesa.data = new Date(this.date).getTime();
     if (this.editingDespesa) {
       this.editar();
     } else {

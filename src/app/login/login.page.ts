@@ -1,10 +1,7 @@
 import { MenuController, NavController, ToastController, LoadingController } from '@ionic/angular';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
-import * as firebase from 'firebase/app';
 import { Usuario } from './../model/usuario';
-import { DBService } from './../services/db.service';
 import { AuthService } from './../services/auth.service';
 
 @Component({
@@ -18,11 +15,14 @@ export class LoginPage implements OnInit, OnDestroy {
     effect: 'slide',
     speed: 600,
     loop: true,
+    zoom: false,
     autoplay: {
       delay: 4000,
     },
   };
 
+
+ 
   private loading: any;
 
   public usuarioLogin: Usuario = {};

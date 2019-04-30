@@ -33,16 +33,18 @@
   </ion-slides>
 
   <ion-grid>
-    <ion-row>
+    <ion-row class="linha">
       <ion-item lines="none">
-        <ion-icon slot="start" name="contact"></ion-icon>
-        <ion-input [(ngModel)]="usuarioLogin.email" type="email" placeholder="Digite o seu e-mail"></ion-input>
+        <ion-icon class="icone" slot="start" name="contact"></ion-icon>
+        <ion-label class="floating" position="floating">E-mail</ion-label>
+        <ion-input [(ngModel)]="usuarioLogin.email" type="email"></ion-input>
       </ion-item>
     </ion-row>
-    <ion-row>
-      <ion-item lines="none">
-        <ion-icon slot="start" name="lock"></ion-icon>
-        <ion-input [(ngModel)]="usuarioLogin.senha" type="password" placeholder="Digite a sua senha"></ion-input>
+    <ion-row class="linha">
+      <ion-item lines="none" >
+        <ion-icon class="icone" slot="start" name="lock"></ion-icon>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input [(ngModel)]="usuarioLogin.senha" type="password"></ion-input>
       </ion-item>
     </ion-row>
   </ion-grid>

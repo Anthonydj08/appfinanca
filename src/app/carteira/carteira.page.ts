@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DBService } from './../services/db.service';
 import { Carteira } from '../model/carteira';
 import { ToastController, AlertController } from '@ionic/angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-carteira',
@@ -11,12 +12,11 @@ import { ToastController, AlertController } from '@ionic/angular';
 export class CarteiraPage{
 
   novaCarteira: Carteira;
-
   carteiras: Carteira[];
-
+  emailUsuario: string;
   loading: boolean;
 
-  constructor( private dbService: DBService, private toast: ToastController, private alertController: AlertController) {
+  constructor( private dbService: DBService, private toast: ToastController, private alertController: AlertController,private afAuth: AngularFireAuth, ) {
     this.novaCarteira = new Carteira();
     this.init();
   }
@@ -24,19 +24,22 @@ export class CarteiraPage{
   private async init() {
     this.loading = true;
 
+    this.emailUsuario = this.afAuth.auth.currentUser.email;
     await this.loadCarteiras();
   }
+
   private async loadCarteiras() {
-    this.dbService.listWithUIDs<Carteira>('/carteira')
-      .then(carteiras => {
-        this.carteiras = carteiras;
-        this.loading = false;
-      }).catch(error => {
-        console.log(error);
-      });
+    await this.dbService.search<Carteira>('/carteira',  'usuarioEmail', this.emailUsuario)
+    .then(carteiras => {
+      this.carteiras = carteiras;
+      this.loading = false;
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
   insert() {
+    this.novaCarteira.usuarioEmail = this.emailUsuario;
     this.dbService.insertInList<Carteira>('/carteira', this.novaCarteira)
       .then(() => {
         this.novaCarteira;

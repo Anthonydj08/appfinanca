@@ -31,26 +31,30 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
-<div *ngIf="!loading">
-  <ion-card *ngFor="let despesa of despesas">
-    <ion-item>
-      <ion-icon (click)="deleteMensagem(despesa.uid)" color="danger" name="trash" slot="end"></ion-icon>
-      <ion-label>{{despesa.nome}}</ion-label>
-    </ion-item>
-    <ion-card-content class="despesa" (click)="edit(despesa)">
-      <ion-row>
-        <ion-col>
-          <ion-label>{{despesa.valor | currency: 'R$'}}</ion-label>
-        </ion-col>
-        <ion-col align-self-end size="3">
-          <div text-end>
-            <ion-label>{{despesa.data | date: 'dd/MM'}}</ion-label>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-</div>
+  <div *ngIf="!loading">
+    <ion-card *ngFor="let despesa of despesas | orderBy: '-data'">
+      <ion-item>
+        <ion-icon (click)="deleteMensagem(despesa.uid)" color="danger" name="trash" slot="end"></ion-icon>
+        <ion-label>{{despesa.nome}}</ion-label>
+      </ion-item>
+      <ion-card-content class="despesa" (click)="edit(despesa)">
+        <ion-row>
+          <ion-col>
+            <ion-label>{{despesa.valor | currency: 'R$'}}</ion-label>
+          </ion-col>
+          <ion-col align-self-end size="3">
+            <div text-end>
+              <ion-label>{{despesa.data | date: 'dd/MM'}}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="despesas.length == 0" class="semDados">
+    <img src="../../assets/ilustracao/noData.png" alt="noData">
+    <ion-label>Você ainda não registrou nenhuma despesa</ion-label>
+  </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="add()">

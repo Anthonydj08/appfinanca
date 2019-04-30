@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Observable } from 'rxjs';
-import { NavController, ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
+import { ModalController, AlertController, ToastController } from '@ionic/angular';
 import { Receita } from '../model/receita';
-import { map } from 'rxjs/operators';
 import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
 import { Carteira } from './../model/carteira';
 import { DBService } from './../services/db.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-receita',
@@ -15,13 +13,17 @@ import { DBService } from './../services/db.service';
 })
 export class ReceitaPage {
 
-
   carteiraList: Carteira[];
   receitas: Receita[];
   loading: boolean;
   loadingLista: boolean;
+  emailUsuario: String;
 
-  constructor(public modalController: ModalController, private dbService: DBService, public toast: ToastController, public alertController: AlertController) {
+  constructor(public modalController: ModalController,
+    private dbService: DBService,
+    public toast: ToastController,
+    public alertController: AlertController,
+    private afAuth: AngularFireAuth) {
     this.init();
   }
 
@@ -37,19 +39,20 @@ export class ReceitaPage {
   private async initData() {
     if (!this.loadingLista) {
       this.loadingLista = true;
+      this.emailUsuario = this.afAuth.auth.currentUser.email;
       await this.loadCarteiraList();
       await this.loadReceitas();
       this.loadingLista = false;
     }
   }
   private async loadCarteiraList() {
-    this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
+    this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
   }
 
-  private async loadReceitas() {
-    this.dbService.listWithUIDs<Receita>('/receita')
+  private async loadReceitas() {    
+    await this.dbService.listWithUIDs<Receita>('/receita')
       .then(receitas => {
-        this.receitas = receitas;
+        this.receitas = receitas.filter(d => this.carteiraList.some(c => c.uid === d.carteiraUID));
         this.associateReceitaAndCarteira();
         this.loading = false;
       }).catch(error => {

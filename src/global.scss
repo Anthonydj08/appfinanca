@@ -10,7 +10,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-
 .sc-ion-back-button-ios-h {
   color: white;
 }
@@ -28,5 +27,23 @@ ion-menu-button {
       width: 350px;
       height: 65%;
     }
+  }
+}
+
+ion-menu ion-header ion-toolbar {
+  background-size: contain;
+  --background: url("assets/ilustracao/fundoPerfiAmarelol.png") center / cover;
+  height: 130px;
+  text-align: -webkit-center;
+}
+.usuario {
+  width: 100%;
+  text-align: center;
+  
+  ion-toolbar .icone {
+    width: 100%;
+    padding-top: 10px;
+    font-size: 70px;
+    color: #777;
   }
 }

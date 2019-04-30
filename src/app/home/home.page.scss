@@ -35,6 +35,7 @@ ion-fab-button[data-desc]::after {
 .resumo {
   background: #4294b4;
   //background-image: linear-gradient(#4294b4, white);
+  padding-bottom: 30px;
 }
 ion-card-title {
   font-size: 22px;
@@ -45,4 +46,22 @@ ion-card-title {
 .nomeReceita {
   font-weight: bold;
   font-size: 15px;
+}
+
+
+ion-header {
+  background-color: var(--ion-color-primary);
+}
+
+ion-segment-button {
+  color: var(--ion-color-contrast);
+}
+
+ion-item {
+  margin: 10px 0;
+}
+.receitaDespesa{
+  margin-top: -15px;
+  border-radius: 15px;
+  background-color: white;
 }

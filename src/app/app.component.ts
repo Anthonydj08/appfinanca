@@ -40,20 +40,22 @@ export class AppComponent implements OnInit {
       icon: 'wallet'
     }
   ];
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
     private localNotifications: LocalNotifications,
-
+    private afAuth: AngularFireAuth,
   ) {
     this.initializeApp();
+    this.nome();
+  }
+  nome() {
+    console.log(this.afAuth.auth.currentUser);
   }
 
   logout() {
-
     firebase.auth().signOut();
     this.router.navigate(['/login']);
   };
@@ -66,6 +68,7 @@ export class AppComponent implements OnInit {
         });
       }
     });
+
   }
 
   mensagensNotificação = [
@@ -78,12 +81,13 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
+
       shuffleArray(this.mensagensNotificação).forEach((message, index) => {
         this.localNotifications.schedule({
           id: index,
           text: message,
           trigger: {
-            in: index * 1,
+            in: 1 + (index * 2),
             unit: ELocalNotificationTriggerUnit.DAY,
           }
         })

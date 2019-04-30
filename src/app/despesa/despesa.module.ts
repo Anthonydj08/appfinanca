@@ -10,6 +10,8 @@ import { CadastroDespesaPage } from './../cadastro-despesa/cadastro-despesa.page
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
+
+import { NgPipesModule, MaxPipe } from 'ngx-pipes';
 const routes: Routes = [
   {
     path: '',
@@ -25,9 +27,13 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    NgPipesModule
   ],
   declarations: [DespesaPage, CadastroDespesaPage],
+  providers: [
+    MaxPipe
+  ],
   entryComponents: [CadastroDespesaPage]
 })
 export class DespesaPageModule {}

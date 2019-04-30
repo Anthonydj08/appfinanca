@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ReceitaPage } from './receita.page';
 import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
 
+import { NgPipesModule, MaxPipe } from 'ngx-pipes';
 const routes: Routes = [
   {
     path: '',
@@ -20,9 +21,13 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgPipesModule
   ],
   declarations: [ReceitaPage, CadastroReceitaPage],
+  providers: [
+    MaxPipe
+  ],
   entryComponents: [CadastroReceitaPage]
 })
 export class ReceitaPageModule {}

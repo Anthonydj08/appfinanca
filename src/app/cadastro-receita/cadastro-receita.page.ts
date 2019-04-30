@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Receita } from '../model/receita';
 import { Carteira } from './../model/carteira';
 import { DBService } from './../services/db.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-cadastro-receita',
@@ -12,15 +13,15 @@ import { DBService } from './../services/db.service';
 export class CadastroReceitaPage {
 
   date: string;
-
   editingReceita: Receita;
-
   novaReceita: Receita;
-
   carteiraList: Carteira[];
+  emailUsuario: string;
 
-  constructor(public modalController: ModalController, private dbService: DBService) {
+  constructor(public modalController: ModalController, private dbService: DBService, private afAuth: AngularFireAuth) {
     this.novaReceita = new Receita();
+    this.novaReceita.tipo = "receita";
+    this.emailUsuario = this.afAuth.auth.currentUser.email;
     this.loadCarteiraList();
     this.date = new Date().toISOString();
   }
@@ -41,7 +42,7 @@ export class CadastroReceitaPage {
   }
 
   private async loadCarteiraList() {
-    this.carteiraList = await this.dbService.listWithUIDs<Carteira>('/carteira');
+    this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
   }
 
   voltar() {
