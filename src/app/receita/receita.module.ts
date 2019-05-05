@@ -9,6 +9,8 @@ import { ReceitaPage } from './receita.page';
 import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
 
 import { NgPipesModule, MaxPipe } from 'ngx-pipes';
+import { TelaReceitaPage } from '../tela-receita/tela-receita.page';
+import { EditaReceitaPage } from '../edita-receita/edita-receita.page';
 const routes: Routes = [
   {
     path: '',
@@ -24,10 +26,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgPipesModule
   ],
-  declarations: [ReceitaPage, CadastroReceitaPage],
+  declarations: [ReceitaPage, CadastroReceitaPage, TelaReceitaPage, EditaReceitaPage],
   providers: [
     MaxPipe
   ],
-  entryComponents: [CadastroReceitaPage]
+  entryComponents: [CadastroReceitaPage, TelaReceitaPage, EditaReceitaPage]
 })
-export class ReceitaPageModule {}
+export class ReceitaPageModule { }

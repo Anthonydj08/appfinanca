@@ -7,6 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { timingSafeEqual } from 'crypto';
 import { Carteira } from '../model/carteira';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-home',
@@ -28,8 +29,9 @@ export class HomePage {
   emailUsuario: String;
 
   data = new Date().getDate();
-  constructor(public router: Router, private dbService: DBService, private fAuth: AngularFireAuth) {
+  constructor(public router: Router, private dbService: DBService, private fAuth: AngularFireAuth, private firebase: Firebase) {
     this.init();
+    this.firebase.setScreenName("Home");
   }
   private async init() {
     this.loading = true;

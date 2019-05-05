@@ -5,6 +5,7 @@ import { CadastroDespesaPage } from '../cadastro-despesa/cadastro-despesa.page';
 import { Carteira } from './../model/carteira';
 import { DBService } from './../services/db.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { TelaDespesaPage } from '../tela-despesa/tela-despesa.page';
 
 @Component({
   selector: 'app-despesa',
@@ -128,11 +129,11 @@ export class DespesaPage {
     toast.present();
   }
 
-  async edit(despesa: Despesa) {
+  async mostra(despesa: Despesa) {
     const modal = await this.modalController.create({
-      component: CadastroDespesaPage,
+      component: TelaDespesaPage,
       componentProps: {
-        editingDespesa: despesa
+        showDespesa: despesa
       }
     });
 

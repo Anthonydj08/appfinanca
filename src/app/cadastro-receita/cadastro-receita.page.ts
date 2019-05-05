@@ -13,7 +13,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class CadastroReceitaPage {
 
   date: string;
-  editingReceita: Receita;
   novaReceita: Receita;
   carteiraList: Carteira[];
   emailUsuario: string;
@@ -35,12 +34,6 @@ export class CadastroReceitaPage {
     mode: 'ios',
   };
 
-  ngOnInit() {
-    if (this.editingReceita) {
-      this.novaReceita = this.editingReceita;
-    }
-  }
-
   private async loadCarteiraList() {
     this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
   }
@@ -51,24 +44,6 @@ export class CadastroReceitaPage {
 
   salvar() {
     this.novaReceita.data = new Date(this.date).getTime();
-    if (this.editingReceita) {
-      this.editar();
-    } else {
-      this.inserir();
-    }
-  }
-
-  private editar() {
-    const updatingObject = { nome: this.novaReceita.nome, categoria: this.novaReceita.categoria, valor: this.novaReceita.valor, data: this.novaReceita.data, carteiraUID: this.novaReceita.carteiraUID };
-    this.dbService.update('/receita', this.novaReceita.uid, updatingObject)
-      .then(() => {
-        this.modalController.dismiss(this.novaReceita);
-      }).catch(error => {
-        console.log(error);
-      });
-  }
-
-  private inserir() {
     this.dbService.insertInList<Receita>('/receita', this.novaReceita)
       .then(() => {
         this.modalController.dismiss(this.novaReceita);
@@ -76,36 +51,4 @@ export class CadastroReceitaPage {
         console.log(error);
       });
   }
-
-
-
-
-
-  /*
-  
-  
-  
-    novaReceita: Receita;
-    constructor(public modalController: ModalController) {
-      this.novaReceita = new Receita();
-    }
-    
-    startDate = new Date().toISOString();
-    maxDate = new Date().toISOString();
-  
-    customAlertOptions: any = {
-      header: 'Categorias',
-      mode: 'ios',
-    };
-  
-    voltar() {
-      this.modalController.dismiss();
-    }
-    salvar() {
-      if (!this.novaReceita.data) {
-        this.novaReceita.data = this.startDate;
-      } 
-      this.modalController.dismiss(this.novaReceita);
-      this.novaReceita = new Receita();
-    }*/
 }

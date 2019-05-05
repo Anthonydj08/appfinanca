@@ -5,5 +5,5 @@ export class Despesa {
     data: number;
     categoria:String;
     tipo:String;
-    carteiraUID:String;
+    carteiraUID:string;
 };

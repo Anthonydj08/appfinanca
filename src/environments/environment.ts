@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyA-WkRR_5keLAgc_dGolZdrJZ6wSKa2X7I",
-    authDomain: "testefire-deee0.firebaseapp.com",
-    databaseURL: "https://testefire-deee0.firebaseio.com",
-    projectId: "testefire-deee0",
-    storageBucket: "testefire-deee0.appspot.com",
-    messagingSenderId: "586393595212"
+    apiKey: "AIzaSyBMxQMpENDpZKnJTII8eg9BvNs7dgEDPB4",
+    authDomain: "controlefinancas.firebaseapp.com",
+    databaseURL: "https://controlefinancas.firebaseio.com",
+    projectId: "controlefinancas",
+    storageBucket: "controlefinancas.appspot.com",
+    messagingSenderId: "930709469497"
   }
 };
 

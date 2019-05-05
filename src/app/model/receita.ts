@@ -5,5 +5,5 @@ export class Receita {
     data: number;
     categoria:String;
     tipo:String;
-    carteiraUID:String;
+    carteiraUID:string;
 };

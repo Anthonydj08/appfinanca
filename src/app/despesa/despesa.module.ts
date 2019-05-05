@@ -8,10 +8,12 @@ import { IonicModule } from '@ionic/angular';
 import { DespesaPage } from './despesa.page';
 import { CadastroDespesaPage } from './../cadastro-despesa/cadastro-despesa.page';
 
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 import { NgPipesModule, MaxPipe } from 'ngx-pipes';
+import { TelaDespesaPage } from '../tela-despesa/tela-despesa.page';
+import { EditaDespesaPage } from '../edita-despesa/edita-despesa.page';
 const routes: Routes = [
   {
     path: '',
@@ -21,8 +23,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-  
-  CommonModule,
+
+    CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
@@ -30,10 +32,10 @@ const routes: Routes = [
     MatSelectModule,
     NgPipesModule
   ],
-  declarations: [DespesaPage, CadastroDespesaPage],
+  declarations: [DespesaPage, CadastroDespesaPage, TelaDespesaPage, EditaDespesaPage],
   providers: [
     MaxPipe
   ],
-  entryComponents: [CadastroDespesaPage]
+  entryComponents: [CadastroDespesaPage, TelaDespesaPage, EditaDespesaPage]
 })
-export class DespesaPageModule {}
+export class DespesaPageModule { }

@@ -18,7 +18,7 @@
       <ion-label> {{receita.nome}}</ion-label>
     </ion-item>
 
-    <ion-card-content class="receita" (click)="edit(receita)">
+    <ion-card-content class="receita" (click)="mostra(receita)">
       <ion-row>
         <ion-col>
           <ion-label>{{receita.valor | currency: 'R$'}}</ion-label>
@@ -38,7 +38,6 @@
         <ion-icon color="danger" name="trash" slot="end"></ion-icon>
         <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
       </ion-item>
-
       <ion-card-content class="receita">
         <ion-row>
           <ion-col>

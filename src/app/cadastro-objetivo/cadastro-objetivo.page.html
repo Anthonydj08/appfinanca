@@ -94,8 +94,8 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  
-  
+
+
     <ion-card class="transacao">
       <ion-card-header>
         <ion-card-title>Transações</ion-card-title>
@@ -111,28 +111,27 @@
         </ion-row>
       </ion-grid>
     </ion-card>
-  
+
     <ion-card>
       <ion-card-header>
         <ion-card-title>Nova Transação</ion-card-title>
       </ion-card-header>
-        <ion-row align-items-center>
-          <ion-col size="1">
-            <ion-icon size="large" name="logo-usd"></ion-icon>
-          </ion-col>
-          <ion-col size="9">
-            <ion-input placeholder="Digite o valor" type="number" [(ngModel)]="novaTransacao.valor"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-icon (click)="inserirTransacao()" color="success" name="checkmark" size="large"></ion-icon>
-          </ion-col>
-        </ion-row>
+      <ion-row align-items-center>
+        <ion-col size="1">
+          <ion-icon size="large" name="logo-usd"></ion-icon>
+        </ion-col>
+        <ion-col size="9">
+          <ion-input placeholder="Digite o valor" type="number" [(ngModel)]="novaTransacao.valor"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-icon (click)="inserirTransacao()" color="success" name="checkmark" size="large"></ion-icon>
+        </ion-col>
+      </ion-row>
     </ion-card>
 
 
     <ion-fab vertical="botton" horizontal="end" slot="fixed">
-      <ion-fab-button
-        class="submit-btn" (click)="editingObjetivo = false" type="submit">
+      <ion-fab-button class="submit-btn" (click)="editingObjetivo = false" type="submit">
         <ion-icon name="create"></ion-icon>
       </ion-fab-button>
     </ion-fab>

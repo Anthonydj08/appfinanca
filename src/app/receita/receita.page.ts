@@ -5,6 +5,7 @@ import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
 import { Carteira } from './../model/carteira';
 import { DBService } from './../services/db.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { TelaReceitaPage } from '../tela-receita/tela-receita.page';
 
 @Component({
   selector: 'app-receita',
@@ -49,7 +50,7 @@ export class ReceitaPage {
     this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
   }
 
-  private async loadReceitas() {    
+  private async loadReceitas() {
     await this.dbService.listWithUIDs<Receita>('/receita')
       .then(receitas => {
         this.receitas = receitas.filter(d => this.carteiraList.some(c => c.uid === d.carteiraUID));
@@ -123,11 +124,11 @@ export class ReceitaPage {
     toast.present();
   }
 
-  async edit(Receita: Receita) {
+  async mostra(Receita: Receita) {
     const modal = await this.modalController.create({
-      component: CadastroReceitaPage,
+      component: TelaReceitaPage,
       componentProps: {
-        editingReceita: Receita
+        showReceita: Receita
       }
     });
 

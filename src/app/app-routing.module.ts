@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  { path: '', loadChildren: './login/login.module#LoginPageModule',canActivate: [LoginGuard] },
+  { path: '', loadChildren: './login/login.module#LoginPageModule', canActivate: [LoginGuard] },
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule', canActivate: [AuthGuard] },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule', canActivate: [LoginGuard] },
   { path: 'home', redirectTo: '/tabs/home', canActivate: [AuthGuard] },
@@ -13,6 +13,10 @@ const routes: Routes = [
   { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule', canActivate: [LoginGuard] },
   { path: 'objetivo', loadChildren: './objetivo/objetivo.module#ObjetivoPageModule', canActivate: [AuthGuard] },
   { path: 'carteira', loadChildren: './carteira/carteira.module#CarteiraPageModule', canActivate: [AuthGuard] },
+  { path: 'tela-receita', loadChildren: './tela-receita/tela-receita.module#TelaReceitaPageModule', canActivate: [AuthGuard] },
+  { path: 'edita-receita', loadChildren: './edita-receita/edita-receita.module#EditaReceitaPageModule',  canActivate: [AuthGuard] },
+  { path: 'edita-despesa', loadChildren: './edita-despesa/edita-despesa.module#EditaDespesaPageModule' },
+  { path: 'tela-despesa', loadChildren: './tela-despesa/tela-despesa.module#TelaDespesaPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

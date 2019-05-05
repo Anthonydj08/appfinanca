@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Nova receita</ion-title>
+    <ion-title>Editar Receita</ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="voltar()">
         <ion-back-button defaultHref="/tabs/receita"></ion-back-button>
@@ -70,26 +70,14 @@
           </ion-select>
         </ion-col>
       </ion-row>
-      
-      <ion-row>
-        <ion-col size="12">
-          <ion-segment mode="ios">
-            <ion-segment-button>
-              <ion-icon name="pin"></ion-icon>
-            </ion-segment-button>
-            <ion-segment-button>
-              <ion-icon name="camera"></ion-icon>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-col>
-      </ion-row>
+
 
     </ion-grid>
   </ion-list>
 
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button [disabled]="!novaReceita.valor || !novaReceita.nome || !novaReceita.categoria " class="submit-btn"
-      (click)="salvar()" type="submit">
+      (click)="editar()" type="submit">
       <ion-icon name="checkmark"></ion-icon>
     </ion-fab-button>
   </ion-fab>

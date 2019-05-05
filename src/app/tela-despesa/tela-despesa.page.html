@@ -1,0 +1,60 @@
+<ion-header no-border>
+    <ion-toolbar [class.show-background]="showToolbar">
+      <ion-buttons slot="start">
+        <ion-button (click)="voltar()">
+          <ion-back-button mode="md" defaultHref="/tabs/receita"></ion-back-button>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content fullscreen [scrollEvents]="true" (ionScroll)="onScroll($event)">
+    <div class="mapa">
+      <img class="imagem" src="../../assets/ilustracao/mapa.jpg" alt="mapa">
+      <ion-row>
+        <ion-col>
+          <ion-label>{{showDespesa.valor | currency: "BRL"}}</ion-label>
+        </ion-col>
+      </ion-row>
+    </div>
+  
+    <ion-grid padding>
+      <ion-row align-items-center>
+        <ion-col>
+          <ion-label class="nome">{{showDespesa.nome}}</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-col size="1.25">
+          <ion-icon size="large" name="wallet"></ion-icon>
+        </ion-col>
+        <ion-col size="8">
+          <ion-label>{{showDespesa.carteiraUID}}</ion-label>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row align-items-center>
+        <ion-col>
+          <ion-label>Categoria</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label class="direita">{{showDespesa.categoria}}</ion-label>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row align-items-center>
+        <ion-col>
+          <ion-label>Data</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label class="direita">{{showDespesa.data | date: 'dd/MM/yyyy, HH:mm' }}</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+    <ion-fab class="fab" vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="edit(showDespesa)">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>

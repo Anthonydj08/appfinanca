@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "930709469497",
+    "firebase_url": "https://controlefinancas.firebaseio.com",
+    "project_id": "controlefinancas",
+    "storage_bucket": "controlefinancas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930709469497:android:476a6c3ce744619b",
+        "android_client_info": {
+          "package_name": "com.ionic.controlefinancas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930709469497-45e8heej4dhjhfg1h9mdettav5opbqa5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmbIrpK3Zl0q7eATkOlBU0nUWINfSrflo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930709469497-45e8heej4dhjhfg1h9mdettav5opbqa5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

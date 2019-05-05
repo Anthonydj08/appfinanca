@@ -1,0 +1,39 @@
+.mapa {
+    background-color: antiquewhite;
+    width: 100%;
+    height: 140px;
+    ion-col {
+      margin-top: -50px;
+      margin-left: 15px;
+    }
+    ion-label {
+      font-size: 150%;
+    }
+  }
+  .nome {
+    font-size: 20px;
+  }
+  .direita {
+    float: right;
+  }
+  .imagem {
+    border: 0;
+    width: 100%;
+    margin-top: -55px;
+    height: 200px;
+  }
+  .fab{
+      padding-top: 110px;
+  }
+  ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+  }
+  ion-buttons, ion-button{
+   color: black;
+  }
+  
+  .show-background {
+      border-style: none;
+      background: var(--ion-color-primary);
+  }

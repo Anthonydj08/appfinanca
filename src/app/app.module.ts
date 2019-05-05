@@ -26,6 +26,8 @@ import { DBService } from './services/db.service';
 
 import { BrMaskerModule } from 'br-mask';
 
+import { Firebase } from '@ionic-native/firebase/ngx';
+
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
   entryComponents: [],
@@ -40,7 +42,7 @@ import { BrMaskerModule } from 'br-mask';
     MatInputModule,
     MatTableModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     StatusBar,
@@ -49,6 +51,7 @@ import { BrMaskerModule } from 'br-mask';
     LocalNotifications,
     AngularFireDatabase,
     DBService,
+    Firebase
   ],
   bootstrap: [AppComponent]
 })

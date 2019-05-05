@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Nova receita</ion-title>
+    <ion-title>Editar Despesa</ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="voltar()">
-        <ion-back-button defaultHref="/tabs/receita"></ion-back-button>
+        <ion-back-button defaultHref="/tabs/despesa"></ion-back-button>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -18,7 +18,7 @@
           <ion-icon size="large" name="logo-usd"></ion-icon>
         </ion-col>
         <ion-col size="8">
-          <ion-input class="valor" placeholder="0,00" type="number" [(ngModel)]="novaReceita.valor">
+          <ion-input class="valor" placeholder="0,00" type="number" [(ngModel)]="novaDespesa.valor">
           </ion-input>
         </ion-col>
       </ion-row>
@@ -28,7 +28,7 @@
           <ion-icon size="large" name="create"></ion-icon>
         </ion-col>
         <ion-col>
-          <ion-input placeholder="Digite o nome da receita" type="text" [(ngModel)]="novaReceita.nome"></ion-input>
+          <ion-input placeholder="Digite o nome da receita" type="text" [(ngModel)]="novaDespesa.nome"></ion-input>
         </ion-col>
       </ion-row>
 
@@ -38,11 +38,11 @@
         </ion-col>
         <ion-col>
           <ion-select [interfaceOptions]="customAlertCategoria" interface="alert" cancelText="Cancelar"
-            [(ngModel)]="novaReceita.categoria" placeholder="Categoria">
-            <ion-select-option value="Salário">Salário</ion-select-option>
-            <ion-select-option value="Vendas">Vendas</ion-select-option>
-            <ion-select-option value="Juros">Juros</ion-select-option>
-            <ion-select-option value="Presentes">Presentes</ion-select-option>
+            [(ngModel)]="novaDespesa.categoria" placeholder="Categoria">
+            <ion-select-option value="Comida">Comida</ion-select-option>
+            <ion-select-option value="Lazer">Lazer</ion-select-option>
+            <ion-select-option value="Educação">Educação</ion-select-option>
+            <ion-select-option value="Casa">Casa</ion-select-option>
             <ion-select-option value="Outros">Outros</ion-select-option>
           </ion-select>
         </ion-col>
@@ -63,33 +63,21 @@
           <ion-icon size="large" name="wallet"></ion-icon>
         </ion-col>
         <ion-col>
-          <ion-select [(ngModel)]="novaReceita.carteiraUID" [interfaceOptions]="customAlertCarteira"
+          <ion-select [(ngModel)]="novaDespesa.carteiraUID" [interfaceOptions]="customAlertCarteira"
             placeholder="Carteira">
             <ion-select-option *ngFor="let carteira of carteiraList" [value]="carteira.uid">{{carteira.nome}}
             </ion-select-option>
           </ion-select>
         </ion-col>
       </ion-row>
-      
-      <ion-row>
-        <ion-col size="12">
-          <ion-segment mode="ios">
-            <ion-segment-button>
-              <ion-icon name="pin"></ion-icon>
-            </ion-segment-button>
-            <ion-segment-button>
-              <ion-icon name="camera"></ion-icon>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-col>
-      </ion-row>
+
 
     </ion-grid>
   </ion-list>
 
   <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button [disabled]="!novaReceita.valor || !novaReceita.nome || !novaReceita.categoria " class="submit-btn"
-      (click)="salvar()" type="submit">
+    <ion-fab-button [disabled]="!novaDespesa.valor || !novaDespesa.nome || !novaDespesa.categoria " class="submit-btn"
+      (click)="editar()" type="submit">
       <ion-icon name="checkmark"></ion-icon>
     </ion-fab-button>
   </ion-fab>

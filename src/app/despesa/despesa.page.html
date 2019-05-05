@@ -37,7 +37,7 @@
         <ion-icon (click)="deleteMensagem(despesa.uid)" color="danger" name="trash" slot="end"></ion-icon>
         <ion-label>{{despesa.nome}}</ion-label>
       </ion-item>
-      <ion-card-content class="despesa" (click)="edit(despesa)">
+      <ion-card-content class="despesa" (click)="mostra(despesa)">
         <ion-row>
           <ion-col>
             <ion-label>{{despesa.valor | currency: 'R$'}}</ion-label>
