@@ -40,6 +40,15 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'graficos',
+        children: [
+          {
+            path: '',
+            loadChildren: '../graficos/graficos.module#GraficosPageModule'
+          }
+        ]
+      },
       
     ]
   },

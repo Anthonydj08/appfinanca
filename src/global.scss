@@ -39,11 +39,17 @@ ion-menu ion-header ion-toolbar {
 .usuario {
   width: 100%;
   text-align: center;
-  
+
   ion-toolbar .icone {
     width: 100%;
     padding-top: 10px;
     font-size: 70px;
     color: #777;
   }
+}
+.list-ios,
+.list-md {
+  margin: 0;
+  padding: 0;
+  padding-right: 15px;
 }

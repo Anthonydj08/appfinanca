@@ -37,12 +37,32 @@ export class LoginPage implements OnInit, OnDestroy {
     this.usuarioLogin = new Usuario();
   }
 
+async loginFacebook(){
+  await this.presentLoading();
+  try {
+    await this.authService.signInWithFacebook();
+  } catch (error) {
+    console.log(error);
+    let message: string;
+    switch (error.code) {
+      case 'auth/popup-closed-by-user':
+        message = 'Operação cancelada pelo usuário.'
+        break;
+      
+    }
+    this.presentToast(message);
 
+  } finally {
+    this.loading.dismiss();
+  }
+
+
+}
   async loginGoogle() {
     await this.presentLoading();
 
     try {
-      await this.authService.loginGoogle();
+      await this.authService.signInWithGoogle();
     } catch (error) {
       console.log(error);
       let message: string;

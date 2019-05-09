@@ -30,8 +30,8 @@ export class HomePage {
 
   data = new Date().getDate();
   constructor(public router: Router, private dbService: DBService, private fAuth: AngularFireAuth, private firebase: Firebase) {
-    this.init();
     this.firebase.setScreenName("Home");
+    this.init();
   }
   private async init() {
     this.loading = true;
@@ -102,15 +102,6 @@ export class HomePage {
     this.saldo = this.totalReceita - this.totalDespesa;
   }
 
-  private despesasMes() {
-    this.despesas = this.despesas.filter(despesa =>{
-      
-    })
-    for (let index = 0; index < this.despesas.length; index++) {
-
-    }
-    return this.totalReceita;
-  }
 
 
   openReceita() {

@@ -44,25 +44,35 @@ export class AuthService {
     return this.afa.auth;
   }
 
+  signInWithFacebook() {
+		console.log('Sign in with google');
+		return this.oauthSignIn(new firebase.auth.FacebookAuthProvider());
+	}
+
+  signInWithGoogle() {
+		console.log('Sign in with google');
+		return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
+	}
+
   private oauthSignIn(provider: AuthProvider) {
-    if (!(<any>window).cordova) {
-      return this.afa.auth.signInWithPopup(provider);
-    } else {
-      return this.afa.auth.signInWithRedirect(provider)
-        .then(() => {
-          return this.afa.auth.getRedirectResult().then(result => {
-            // This gives you a Google Access Token.
-            // You can use it to access the Google API.
-            let token = result.credential.providerId;
-            // The signed-in user info.
-            let user = result.user;
-            console.log(token, user);
-          }).catch(function (error) {
-            // Handle Errors here.
-            alert(error.message);
-          });
-        });
-    }
-  }
+		if (!(<any>window).cordova) {
+			return this.afa.auth.signInWithPopup(provider);
+		} else {
+			return this.afa.auth.signInWithRedirect(provider)
+			.then(() => {
+				return this.afa.auth.getRedirectResult().then( result => {
+					// This gives you a Google Access Token.
+					// You can use it to access the Google API.
+					let token = result.credential.providerId;
+					// The signed-in user info.
+					let user = result.user;
+					console.log(token, user);
+				}).catch(function(error) {
+					// Handle Errors here.
+					alert(error.message);
+				});
+			});
+		}
+	}
 
 }

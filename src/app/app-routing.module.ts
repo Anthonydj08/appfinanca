@@ -14,9 +14,12 @@ const routes: Routes = [
   { path: 'objetivo', loadChildren: './objetivo/objetivo.module#ObjetivoPageModule', canActivate: [AuthGuard] },
   { path: 'carteira', loadChildren: './carteira/carteira.module#CarteiraPageModule', canActivate: [AuthGuard] },
   { path: 'tela-receita', loadChildren: './tela-receita/tela-receita.module#TelaReceitaPageModule', canActivate: [AuthGuard] },
-  { path: 'edita-receita', loadChildren: './edita-receita/edita-receita.module#EditaReceitaPageModule',  canActivate: [AuthGuard] },
-  { path: 'edita-despesa', loadChildren: './edita-despesa/edita-despesa.module#EditaDespesaPageModule' },
-  { path: 'tela-despesa', loadChildren: './tela-despesa/tela-despesa.module#TelaDespesaPageModule' },
+  { path: 'edita-receita', loadChildren: './edita-receita/edita-receita.module#EditaReceitaPageModule', canActivate: [AuthGuard] },
+  { path: 'edita-despesa', loadChildren: './edita-despesa/edita-despesa.module#EditaDespesaPageModule', canActivate: [AuthGuard] },
+  { path: 'tela-despesa', loadChildren: './tela-despesa/tela-despesa.module#TelaDespesaPageModule', canActivate: [AuthGuard] },
+  { path: 'categoria', loadChildren: './categoria/categoria.module#CategoriaPageModule', canActivate: [AuthGuard] },
+  { path: 'icone', loadChildren: './icone/icone.module#IconePageModule', canActivate: [AuthGuard] },
+  { path: 'graficos', loadChildren: './graficos/graficos.module#GraficosPageModule', canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

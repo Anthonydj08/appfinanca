@@ -3,7 +3,6 @@ import { Objetivo } from '../model/objetivo';
 import { ModalController } from '@ionic/angular';
 import { DBService } from './../services/db.service';
 import { Transacao } from '../model/transacao';
-import { initDomAdapter } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-cadastro-objetivo',

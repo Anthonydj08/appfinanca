@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Categorias</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="segmentChanged($event)" value="Despesas">
+    <ion-segment-button value="Despesas">
+      <ion-label>Despesas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Receitas">
+      <ion-label>Receitas</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-list *ngFor="let categoria of categoriaList">
+    <ion-item-sliding>
+      <ion-item>
+        <ion-row align-items-center>
+          <ion-col class="icone">
+            <i class="iconeIcon fas fa-{{categoria.icone}}"></i>
+          </ion-col>
+          <ion-col>
+            <ion-label class="nomeCategoria">{{categoria.nome}}</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="unread(item)">Excluir</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-card fixed>
+    <ion-card-header>
+      <ion-card-title>Adicione uma categoria</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-row align-items-center>
+        <ion-col size="1.4" *ngIf="!icone" class="iconeNull">
+          <i (click)="abrirIcones()" class="iconeIcon fas fa-exclamation"></i>
+        </ion-col>
+        <ion-col size="1.4" *ngIf="icone" class="icone">
+          <i class="iconeIcon fas fa-{{icone}}" (click)="abrirIcones()"></i>
+        </ion-col>
+        <ion-col>
+          <ion-input class="nomeCategoria" placeholder="Digite o nome da categoria" type="text"
+            [(ngModel)]="novaCategoria.nome"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-select [interfaceOptions]="customPopoverCategoria" interface="popover" cancelText="Cancelar"
+            [(ngModel)]="novaCategoria.tipo" placeholder="Selecione um tipo">
+            <ion-select-option value="Receita">Receita</ion-select-option>
+            <ion-select-option value="Despesa">Despesa</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-button (click)="salvar()" [disabled]="!novaCategoria.nome || !icone || !novaCategoria.tipo ">
+        salvar categoria
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Adicionar icone</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row align-items-center>
+        <ion-col size="1.25">
+          <ion-icon size="large" name="create"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-input placeholder="Digite o nome do icone" type="text" [(ngModel)]="novoIcone.nome"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-col size="1.25">
+          <ion-icon size="large" name="create"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-input placeholder="Digite a categoria" type="text" [(ngModel)]="novoIcone.categoria"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-button (click)="salvarIcone()">
+        salvar icone
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

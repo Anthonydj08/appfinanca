@@ -1,4 +1,5 @@
 export class Categoria {
-    nome: String;
-    icon: String;
+    nome: string;
+    icone: string;
+    tipo:string;
 };

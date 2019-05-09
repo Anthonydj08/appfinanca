@@ -27,6 +27,7 @@ import { DBService } from './services/db.service';
 import { BrMaskerModule } from 'br-mask';
 
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
@@ -51,7 +52,8 @@ import { Firebase } from '@ionic-native/firebase/ngx';
     LocalNotifications,
     AngularFireDatabase,
     DBService,
-    Firebase
+    Firebase,
+    ScreenOrientation
   ],
   bootstrap: [AppComponent]
 })

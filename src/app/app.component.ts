@@ -8,6 +8,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import * as shuffleArray from 'shuffle-array';
 import * as firebase from 'firebase/app';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -38,6 +40,11 @@ export class AppComponent implements OnInit {
       title: 'Carteira',
       url: '/carteira',
       icon: 'wallet'
+    },
+    {
+      title: 'Categorias',
+      url: '/categoria',
+      icon: 'clipboard'
     }
   ];
   constructor(
@@ -46,7 +53,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private router: Router,
     private localNotifications: LocalNotifications,
-    private afAuth: AngularFireAuth,
+    private afAuth: AngularFireAuth,private screenOrientation: ScreenOrientation
   ) {
     this.initializeApp();
     this.nome();
@@ -80,7 +87,7 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
       shuffleArray(this.mensagensNotificação).forEach((message, index) => {
         this.localNotifications.schedule({

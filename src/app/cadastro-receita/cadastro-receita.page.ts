@@ -4,6 +4,7 @@ import { Receita } from '../model/receita';
 import { Carteira } from './../model/carteira';
 import { DBService } from './../services/db.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Categoria } from '../model/categoria';
 
 @Component({
   selector: 'app-cadastro-receita',
@@ -15,6 +16,7 @@ export class CadastroReceitaPage {
   date: string;
   novaReceita: Receita;
   carteiraList: Carteira[];
+  categoriaList: Categoria[];
   emailUsuario: string;
 
   constructor(public modalController: ModalController, private dbService: DBService, private afAuth: AngularFireAuth) {
@@ -22,6 +24,7 @@ export class CadastroReceitaPage {
     this.novaReceita.tipo = "receita";
     this.emailUsuario = this.afAuth.auth.currentUser.email;
     this.loadCarteiraList();
+    this.loadCategoriaList();
     this.date = new Date().toISOString();
   }
 
@@ -29,13 +32,16 @@ export class CadastroReceitaPage {
     header: 'Categorias',
     mode: 'ios',
   };
-  customAlertCarteira: any = {
+  customPopoverCarteira: any = {
     header: 'Carteiras',
     mode: 'ios',
   };
 
   private async loadCarteiraList() {
     this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
+  }
+  private async loadCategoriaList(){
+    this.categoriaList = await this.dbService.search<Categoria>('/categoria', 'tipo', 'Receita');
   }
 
   voltar() {
