@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'categoria', loadChildren: './categoria/categoria.module#CategoriaPageModule', canActivate: [AuthGuard] },
   { path: 'icone', loadChildren: './icone/icone.module#IconePageModule', canActivate: [AuthGuard] },
   { path: 'graficos', loadChildren: './graficos/graficos.module#GraficosPageModule', canActivate: [AuthGuard] },
+  { path: 'tela-objetivo', loadChildren: './tela-objetivo/tela-objetivo.module#TelaObjetivoPageModule' },
+  { path: 'edita-objetivo', loadChildren: './edita-objetivo/edita-objetivo.module#EditaObjetivoPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -3,6 +3,8 @@ import { ModalController, AlertController, ToastController } from '@ionic/angula
 import { Objetivo } from '../model/objetivo';
 import { CadastroObjetivoPage } from './../cadastro-objetivo/cadastro-objetivo.page';
 import { DBService } from './../services/db.service';
+import { TelaObjetivoPage } from '../tela-objetivo/tela-objetivo.page';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-objetivo',
@@ -13,18 +15,25 @@ export class ObjetivoPage {
 
   objetivos: Objetivo[];
   loading: boolean;
+  emailUsuario: string;
 
-  constructor(public modalController: ModalController, private dbService: DBService, public toast: ToastController, public alertController: AlertController) {
+  constructor(public modalController: ModalController,
+    private dbService: DBService,
+    public toast: ToastController,
+    public alertController: AlertController,
+    private afAuth: AngularFireAuth) {
+
     this.init();
   }
 
   private async init() {
     this.loading = true;
+    this.emailUsuario = this.afAuth.auth.currentUser.email;
     await this.loadObjetivos();
   }
 
   private async loadObjetivos() {
-    this.dbService.listWithUIDs<Objetivo>('/objetivo')
+    this.dbService.search<Objetivo>('/objetivo', 'usuarioEmail', this.emailUsuario)
       .then(objetivos => {
         this.objetivos = objetivos;
         this.loading = false;
@@ -89,11 +98,11 @@ export class ObjetivoPage {
     toast.present();
   }
 
-  async edit(Objetivo: Objetivo) {
+  async mostra(Objetivo: Objetivo) {
     const modal = await this.modalController.create({
-      component: CadastroObjetivoPage,
+      component: TelaObjetivoPage,
       componentProps: {
-        editingObjetivo: Objetivo
+        showObjetivo: Objetivo
       }
     });
 

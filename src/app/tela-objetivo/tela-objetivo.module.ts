@@ -5,26 +5,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ObjetivoPage } from './objetivo.page';
-import { CadastroObjetivoPage } from './../cadastro-objetivo/cadastro-objetivo.page';
+import { TelaObjetivoPage } from './tela-objetivo.page';
 import { EditaObjetivoPage } from '../edita-objetivo/edita-objetivo.page';
-import { TelaObjetivoPage } from '../tela-objetivo/tela-objetivo.page';
+
 const routes: Routes = [
   {
     path: '',
-    component: ObjetivoPage
+    component: TelaObjetivoPage
   }
 ];
 
 @NgModule({
   imports: [
-  
-  CommonModule,
+    CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ObjetivoPage, CadastroObjetivoPage, EditaObjetivoPage, TelaObjetivoPage],
-  entryComponents: [CadastroObjetivoPage, EditaObjetivoPage, TelaObjetivoPage]
+  declarations: [TelaObjetivoPage, EditaObjetivoPage],
+  entryComponents: [EditaObjetivoPage]
 })
-export class ObjetivoPageModule {}
+export class TelaObjetivoPageModule {}

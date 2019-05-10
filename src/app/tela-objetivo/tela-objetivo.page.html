@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{showObjetivo.nome}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-back-button defaultHref="/tabs/objetivo"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-grid class="resumo">
+    <ion-row align-items-center padding (click)="edit(objetivo)">
+      <ion-col size="1.5" offset="0.5">
+        <img class="icone" src="../../assets/icon/target.png">
+      </ion-col>
+      <ion-col size="4">
+        <ion-label>Preciso</ion-label>
+        <ion-row>
+          <ion-label>{{showObjetivo.valor | currency: 'R$'}}</ion-label>
+        </ion-row>
+      </ion-col>
+      <ion-col size="1.5" offset="0.5">
+        <img class="icone" src="../../assets/icon/pig.png">
+      </ion-col>
+      <ion-col size="4">
+        <ion-label>Tenho</ion-label>
+        <ion-row>
+          <ion-label>{{total | currency: 'R$'}}</ion-label>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-card class="transacao">
+    <ion-card-header>
+      <ion-card-title>Transações</ion-card-title>
+    </ion-card-header>
+    <ion-grid *ngFor="let transacao of transacoes">
+      <ion-row align-items-center>
+        <ion-col size="8.5">
+          <ion-label>{{transacao.data | date: 'dd/MM/yyy'}}</ion-label>
+        </ion-col>
+        <ion-col size="3.5">
+          <ion-label class="esquerda">{{transacao.valor | currency: "BRL"}}</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Nova Transação</ion-card-title>
+    </ion-card-header>
+    <ion-row align-items-center>
+      <ion-col size="1">
+        <ion-icon size="large" name="logo-usd"></ion-icon>
+      </ion-col>
+      <ion-col size="9">
+        <ion-input placeholder="Digite o valor" type="number" [(ngModel)]="novaTransacao.valor"></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-icon (click)="inserirTransacao()" color="success" name="checkmark" size="large"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+
+  <ion-fab vertical="botton" horizontal="end" slot="fixed">
+    <ion-fab-button class="submit-btn" (click)="edit(showObjetivo)" type="submit">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
