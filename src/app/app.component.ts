@@ -9,6 +9,8 @@ import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native
 import * as shuffleArray from 'shuffle-array';
 import * as firebase from 'firebase/app';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { Usuario } from './model/usuario';
+import { DBService } from './services/db.service';
 
 @Component({
   selector: 'app-root',
@@ -47,19 +49,41 @@ export class AppComponent implements OnInit {
       icon: 'clipboard'
     }
   ];
+
+  usuarios: Usuario[];
+  usuario: Usuario;
+  userEmail: string;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
     private localNotifications: LocalNotifications,
-    private afAuth: AngularFireAuth,private screenOrientation: ScreenOrientation
+    private afAuth: AngularFireAuth,
+    private screenOrientation: ScreenOrientation,
+    private dbService: DBService
   ) {
     this.initializeApp();
-    this.nome();
+    this.init();
   }
-  nome() {
-    console.log(this.afAuth.auth.currentUser);
+
+  private async init() {
+    await this.loadUsuarios();
+  }
+
+  private async loadUsuarios() {
+    this.afAuth.user.subscribe(async user => {
+      if (user) {
+        this.userEmail = user.email;
+        this.usuarios = await this.dbService.search<Usuario>('/usuario', 'email', this.userEmail);
+        await this.loadUsuario();
+      }
+    });
+  }
+  private async loadUsuario() {
+    this.usuarios = await this.dbService.search<Usuario>('/usuario', 'email', this.userEmail);
+    this.usuario = this.usuarios[0];
   }
 
   logout() {

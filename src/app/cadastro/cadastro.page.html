@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-buttons (click)="backToLogin()">
+  <ion-buttons (click)="backToLogin()" class="voltar">
     <ion-icon name="arrow-round-back"></ion-icon>
     <ion-label>Login</ion-label>
   </ion-buttons>
@@ -8,19 +8,34 @@
     <ion-row>
       <ion-label class="criarConta">Criar conta</ion-label>
     </ion-row>
-    <img class="appIcon" src="../../assets/icon/icon.png" alt="logo app">
-    <ion-row>
-      <ion-input [(ngModel)]="usuarioCadastro.nome" placeholder="Digite o seu nome"></ion-input>
-    </ion-row>
-    <ion-row>
-      <ion-input [(ngModel)]="usuarioCadastro.email" type="email" placeholder="Digite o seu e-mail"></ion-input>
-    </ion-row>
-    <ion-row>
-      <ion-input [(ngModel)]="usuarioCadastro.senha" type="password" placeholder="Digite a sua senha"></ion-input>
-    </ion-row>
-  </ion-grid>
+    <img class="appIcon" src="../../assets/ilustracao/welcome.png" alt="welcome">
 
+    <ion-grid>
+      <ion-row class="linha">
+        <ion-item lines="none">
+          <ion-icon class="icone" slot="start" name="contact"></ion-icon>
+          <ion-label class="floating" position="floating">Nome</ion-label>
+          <ion-input [(ngModel)]="usuarioCadastro.nome" type="text"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row class="linha">
+        <ion-item lines="none">
+          <ion-icon class="icone" slot="start" name="mail"></ion-icon>
+          <ion-label class="floating" position="floating">E-mail</ion-label>
+          <ion-input [(ngModel)]="usuarioCadastro.email" type="email"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row class="linha">
+        <ion-item lines="none">
+          <ion-icon class="icone" slot="start" name="lock"></ion-icon>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input [(ngModel)]="usuarioCadastro.senha" type="password"></ion-input>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
   <ion-row>
     <ion-button fill="outline" mode="ios" expand="full" (click)="register()">Cadastrar</ion-button>
   </ion-row>
+
 </ion-content>

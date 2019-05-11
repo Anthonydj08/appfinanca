@@ -6,7 +6,8 @@
         <div class="usuario">
           <ion-toolbar>
             <ion-icon class="icone" name="contact"></ion-icon>
-            <ion-label color="dark">nomeUsuario</ion-label>
+            <ion-label *ngIf="usuario" color="dark">{{usuario.nome}}</ion-label>
+            <ion-label *ngIf="!usuario" color="dark">nomeUsuario</ion-label>
           </ion-toolbar>
         </div>
       </ion-header>

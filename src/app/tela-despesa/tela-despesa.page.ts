@@ -27,7 +27,6 @@ export class TelaDespesaPage implements OnInit {
   }
 
   constructor(public modalController: ModalController, public toast: ToastController, public dbService: DBService, public afAuth: AngularFireAuth) {
-
     this.emailUsuario = this.afAuth.auth.currentUser.email;
     this.loadCarteiraList();
   }

@@ -4,4 +4,5 @@ export class Objetivo{
     categoria:String;
     data:number;
     valor:number;
+    usuarioEmail:string;
 }

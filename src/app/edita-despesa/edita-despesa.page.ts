@@ -34,13 +34,13 @@ export class EditaDespesaPage implements OnInit {
   };
 
   async ngOnInit() {
-await this.loadCategoriaList();
+    await this.loadCategoriaList();
     await this.loadCarteiraList();
 
     if (this.editingDespesa) {
       this.novaDespesa = this.editingDespesa;
     }
-    
+
     this.date = new Date(this.novaDespesa.data).toISOString();
   }
   private async loadCarteiraList() {
@@ -52,7 +52,6 @@ await this.loadCategoriaList();
   }
 
   editar() {
-   
     const updatingObject = { nome: this.novaDespesa.nome, categoria: this.novaDespesa.categoria, valor: this.novaDespesa.valor, data: this.novaDespesa.data, carteiraUID: this.novaDespesa.carteiraUID };
     this.dbService.update('/despesa', this.novaDespesa.uid, updatingObject)
       .then(() => {

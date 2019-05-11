@@ -35,13 +35,13 @@
   <ion-grid>
     <ion-row class="linha">
       <ion-item lines="none">
-        <ion-icon class="icone" slot="start" name="contact"></ion-icon>
+        <ion-icon class="icone" slot="start" name="mail"></ion-icon>
         <ion-label class="floating" position="floating">E-mail</ion-label>
         <ion-input [(ngModel)]="usuarioLogin.email" type="email"></ion-input>
       </ion-item>
     </ion-row>
     <ion-row class="linha">
-      <ion-item lines="none" >
+      <ion-item lines="none">
         <ion-icon class="icone" slot="start" name="lock"></ion-icon>
         <ion-label position="floating">Senha</ion-label>
         <ion-input [(ngModel)]="usuarioLogin.senha" type="password"></ion-input>
@@ -49,23 +49,23 @@
     </ion-row>
   </ion-grid>
   <ion-row>
-     
+
     <ion-button fill="outline" mode="ios" expand="full" (click)="loginEmail()">Entrar</ion-button>
   </ion-row>
   <ion-row>
-      <div margin text-center>
-        <ion-label (click)="senha()">Esqueceu a senha?</ion-label>
-      </div>
-    </ion-row>
+    <div margin text-center>
+      <ion-label (click)="senha()">Esqueceu a senha?</ion-label>
+    </div>
+  </ion-row>
   <ion-row>
     <ion-button fill="outline" mode="ios" expand="full" (click)="loginGoogle()">
       <img class="googleIcon" src="../../assets/icon/google-icon.png" alt="logo google">
       <ion-label padding>Entrar com google</ion-label>
     </ion-button>
-    <ion-button fill="outline" mode="ios" expand="full" (click)="loginFacebook()">
-        <img class="googleIcon" src="../../assets/icon/facebook.png" alt="logo facebook">
-        <ion-label padding>Entrar com Facebook</ion-label>
-      </ion-button>
+    <ion-button class="botaoFacebook" fill="outline" mode="ios" expand="full" (click)="loginFacebook()">
+      <img class="googleIcon" src="../../assets/icon/facebook.png" alt="logo facebook">
+      <ion-label padding>Entrar com Facebook</ion-label>
+    </ion-button>
   </ion-row>
 
   <ion-row>

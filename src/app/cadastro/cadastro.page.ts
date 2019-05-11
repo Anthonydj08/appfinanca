@@ -37,7 +37,7 @@ export class CadastroPage {
 
     try {
       await this.authService.register(this.usuarioCadastro);
-      this.usuarioCadastro.email = null;
+      this.usuarioCadastro.email = this.afAuth.auth.currentUser.email;
       this.usuarioCadastro.senha = null;
       this.usuarioCadastro.uid = this.afAuth.auth.currentUser.uid;
       this.dbService.insertInList<Usuario>('/usuario', this.usuarioCadastro)

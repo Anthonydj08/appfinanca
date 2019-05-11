@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-buttons (click)="voltar()" class="voltar">
+    <ion-icon name="arrow-round-back"></ion-icon>
+    <ion-label>Login</ion-label>
+  </ion-buttons>
+
+  <ion-grid>
+    <ion-row>
+      <ion-label class="criarConta">Alterar senha</ion-label>
+    </ion-row>
+    <img class="appIcon" src="../../assets/ilustracao/senha.png" alt="welcome">
+
+    <ion-grid>
+      <ion-row class="linha">
+        <ion-item lines="none">
+          <ion-icon class="icone" slot="start" name="mail"></ion-icon>
+          <ion-label class="floating" position="floating">E-mail</ion-label>
+          <ion-input [(ngModel)]="email" type="email"></ion-input>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+  
+  <ion-row>
+    <ion-button fill="outline" mode="ios" expand="full" (click)="alteraSenha()">Enviar E-mail</ion-button>
+  </ion-row>
+
+</ion-content>

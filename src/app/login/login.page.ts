@@ -21,8 +21,6 @@ export class LoginPage implements OnInit, OnDestroy {
     },
   };
 
-
- 
   private loading: any;
 
   public usuarioLogin: Usuario = {};
@@ -37,27 +35,25 @@ export class LoginPage implements OnInit, OnDestroy {
     this.usuarioLogin = new Usuario();
   }
 
-async loginFacebook(){
-  await this.presentLoading();
-  try {
-    await this.authService.signInWithFacebook();
-  } catch (error) {
-    console.log(error);
-    let message: string;
-    switch (error.code) {
-      case 'auth/popup-closed-by-user':
-        message = 'Operação cancelada pelo usuário.'
-        break;
-      
+  async loginFacebook() {
+    await this.presentLoading();
+    try {
+      await this.authService.signInWithFacebook();
+    } catch (error) {
+      console.log(error);
+      let message: string;
+      switch (error.code) {
+        case 'auth/popup-closed-by-user':
+          message = 'Operação cancelada pelo usuário.'
+          break;
+
+      }
+      this.presentToast(message);
+
+    } finally {
+      this.loading.dismiss();
     }
-    this.presentToast(message);
-
-  } finally {
-    this.loading.dismiss();
   }
-
-
-}
   async loginGoogle() {
     await this.presentLoading();
 
@@ -70,7 +66,7 @@ async loginFacebook(){
         case 'auth/popup-closed-by-user':
           message = 'Operação cancelada pelo usuário.'
           break;
-        
+
       }
       this.presentToast(message);
 
@@ -104,27 +100,9 @@ async loginFacebook(){
     }
   }
   async senha() {
-    await this.presentLoading();
 
-    try {
-      this.authService.senha(this.usuarioLogin);
-      this.presentToast('Um E-mail foi enviado para ' + this.usuarioLogin.email);
-    } catch (error) {
-      console.log(error);
-      let message: string;
-      switch (error.code) {
-        case 'auth/argument-error':
-          message = 'E-mail inválido.'
-          break;
-        case 'auth/user-not-found':
-          message = 'Usuario não encontrado';
-          break;
-      }
-      this.presentToast(message);
-    }
-    finally {
-      this.loading.dismiss();
-    }
+    this.router.navigate(['/recupera-senha']);
+
   }
   async presentLoading() {
     this.loading = await this.loadingController.create({
