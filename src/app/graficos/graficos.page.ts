@@ -135,7 +135,7 @@ export class GraficosPage {
     const options = {
       title: {
         display: true,
-        text: 'Population growth (millions)'
+        //text: 'Population growth (millions)'
       }
     }
     return this.getChart(this.barCanvas.nativeElement, 'bar', data, options);

@@ -5,6 +5,7 @@ import { CadastroObjetivoPage } from './../cadastro-objetivo/cadastro-objetivo.p
 import { DBService } from './../services/db.service';
 import { TelaObjetivoPage } from '../tela-objetivo/tela-objetivo.page';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Transacao } from '../model/transacao';
 
 @Component({
   selector: 'app-objetivo',
@@ -16,6 +17,9 @@ export class ObjetivoPage {
   objetivos: Objetivo[];
   loading: boolean;
   emailUsuario: string;
+  total: number;
+  transacoes: Transacao[];
+  loadingLista: boolean;
 
   constructor(public modalController: ModalController,
     private dbService: DBService,
@@ -28,8 +32,14 @@ export class ObjetivoPage {
 
   private async init() {
     this.loading = true;
-    this.emailUsuario = this.afAuth.auth.currentUser.email;
-    await this.loadObjetivos();
+    if (!this.loadingLista) {
+      this.loadingLista = true;
+      this.emailUsuario = this.afAuth.auth.currentUser.email;
+      await this.loadObjetivos();
+      await this.loadTransacao();
+      await this.totalTransacao();
+      this.loadingLista = false;
+    }
   }
 
   private async loadObjetivos() {
@@ -41,6 +51,20 @@ export class ObjetivoPage {
         console.log(error);
       });
   }
+  private async loadTransacao() {
+    this.transacoes = await this.dbService.search<Transacao>('/transacao', 'objetivoUID', this.objetivos[0].uid);
+    console.log(this.transacoes);
+    
+  }
+
+  private totalTransacao() {
+    this.total = 0;
+    for (let index = 0; index < this.transacoes.length; index++) {
+      this.total = this.total + this.transacoes[index].valor;
+    }
+    return this.total;
+  }
+
 
   async add() {
     const modal = await this.modalController.create({

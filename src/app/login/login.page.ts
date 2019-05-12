@@ -109,7 +109,6 @@ export class LoginPage implements OnInit, OnDestroy {
       message: 'Carregando',
       translucent: false,
       spinner: "dots",
-      mode: "ios",
     });
     return this.loading.present();
   }
