@@ -49,7 +49,16 @@ const routes: Routes = [
           }
         ]
       },
-      
+      {
+        path: 'perfil',
+        children: [
+          {
+            path: '',
+            loadChildren: '../perfil/perfil.module#PerfilPageModule'
+          }
+        ]
+      },
+
     ]
   },
   {
@@ -63,4 +72,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

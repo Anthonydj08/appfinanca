@@ -91,6 +91,10 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/login']);
   };
 
+  irPerfil() {
+    this.router.navigate(['/perfil']);
+  };
+
   ngOnInit() {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationEnd) {
@@ -118,7 +122,7 @@ export class AppComponent implements OnInit {
           id: index,
           text: message,
           trigger: {
-            in: 1 + (index * 2),
+            in: index * 2,
             unit: ELocalNotificationTriggerUnit.DAY,
           }
         })

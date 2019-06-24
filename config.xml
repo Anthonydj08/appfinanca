@@ -95,4 +95,6 @@
     <plugin name="cordova-plugin-screen-orientation" spec="3.0.1" />
     <preference name="android-minSdkVersion" value="19" />
     <engine name="android" spec="7.1.4" />
+    <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyAmbIrpK3Zl0q7eATkOlBU0nUWINfSrflo" />
+    <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyAmbIrpK3Zl0q7eATkOlBU0nUWINfSrflo" />
 </widget>

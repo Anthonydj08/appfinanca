@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NgPipesModule, MaxPipe } from 'ngx-pipes';
 import { TelaDespesaPage } from '../tela-despesa/tela-despesa.page';
 import { EditaDespesaPage } from '../edita-despesa/edita-despesa.page';
+import { TelaMapaPage } from '../tela-mapa/tela-mapa.page';
 const routes: Routes = [
   {
     path: '',
@@ -32,10 +33,10 @@ const routes: Routes = [
     MatSelectModule,
     NgPipesModule
   ],
-  declarations: [DespesaPage, CadastroDespesaPage, TelaDespesaPage, EditaDespesaPage],
+  declarations: [DespesaPage, CadastroDespesaPage, TelaDespesaPage, EditaDespesaPage, TelaMapaPage],
   providers: [
     MaxPipe
   ],
-  entryComponents: [CadastroDespesaPage, TelaDespesaPage, EditaDespesaPage]
+  entryComponents: [CadastroDespesaPage, TelaDespesaPage, EditaDespesaPage, TelaMapaPage]
 })
 export class DespesaPageModule { }

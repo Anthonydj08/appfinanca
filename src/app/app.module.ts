@@ -28,6 +28,8 @@ import { BrMaskerModule } from 'br-mask';
 
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
@@ -53,7 +55,9 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
     AngularFireDatabase,
     DBService,
     Firebase,
-    ScreenOrientation
+    ScreenOrientation,
+    Geolocation,
+    GoogleMaps
   ],
   bootstrap: [AppComponent]
 })

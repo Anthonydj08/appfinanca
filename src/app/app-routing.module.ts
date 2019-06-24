@@ -21,8 +21,11 @@ const routes: Routes = [
   { path: 'icone', loadChildren: './icone/icone.module#IconePageModule', canActivate: [AuthGuard] },
   { path: 'graficos', loadChildren: './graficos/graficos.module#GraficosPageModule', canActivate: [AuthGuard] },
   { path: 'tela-objetivo', loadChildren: './tela-objetivo/tela-objetivo.module#TelaObjetivoPageModule', canActivate: [AuthGuard] },
-  { path: 'edita-objetivo', loadChildren: './edita-objetivo/edita-objetivo.module#EditaObjetivoPageModule', canActivate: [LoginGuard] },
-  { path: 'recupera-senha', loadChildren: './recupera-senha/recupera-senha.module#RecuperaSenhaPageModule', canActivate: [LoginGuard] },
+  { path: 'edita-objetivo', loadChildren: './edita-objetivo/edita-objetivo.module#EditaObjetivoPageModule', canActivate: [AuthGuard] },
+  { path: 'recupera-senha', loadChildren: './recupera-senha/recupera-senha.module#RecuperaSenhaPageModule', canActivate: [AuthGuard] },
+  { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule', canActivate: [AuthGuard] },  { path: 'tela-mapa', loadChildren: './tela-mapa/tela-mapa.module#TelaMapaPageModule' },
+
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

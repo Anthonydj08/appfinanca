@@ -18,6 +18,7 @@ export class TelaDespesaPage implements OnInit {
   showToolbar = false;
   carteiraList: Carteira[];
   emailUsuario: string;
+  nomeCarteira: string;
 
   onScroll($event: CustomEvent<ScrollDetail>) {
     if ($event && $event.detail && $event.detail.scrollTop) {
@@ -35,8 +36,9 @@ export class TelaDespesaPage implements OnInit {
   }
 
   private async loadCarteiraList() {
-    this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'usuarioEmail', this.emailUsuario);
-    console.log(this.carteiraList);
+    this.carteiraList = await this.dbService.search<Carteira>('/carteira', 'uid', this.showDespesa.carteiraUID);
+    this.nomeCarteira = this.carteiraList[0].nome
+    console.log(this.nomeCarteira);
 
   }
 

@@ -31,7 +31,7 @@ export class CadastroPage {
     this.usuarioCadastro = new Usuario();
   }
 
-  
+
   async register() {
     await this.presentLoading();
 
