@@ -1,12 +1,12 @@
-<ion-header no-border>
-  <ion-toolbar>
+<ion-header   no-border >
+  <ion-toolbar class="header" #toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen scrollEvents="true" [appHideHeader]="toolbar">
   <ion-grid class="resumo">
     <ion-row justify-content-center>
       <div text-uppercase class="mes">
@@ -45,7 +45,7 @@
     <ion-card-header>
       <ion-card-title>Últimas movimentações</ion-card-title>
     </ion-card-header>
-    <ion-grid *ngFor="let movimento of movimentos | orderBy: '-data' | slice:0:5">
+    <ion-grid *ngFor="let movimento of movimentos | orderBy: '-data' | slice:0:5" (click)="openMovimento(movimento)">
       <ion-row align-items-center>
         <ion-col size="1">
           <div *ngIf="movimento.tipo == 'receita'">

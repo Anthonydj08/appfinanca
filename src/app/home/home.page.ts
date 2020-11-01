@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Receita } from '../model/receita';
 import { Despesa } from '../model/despesa';
@@ -11,11 +11,13 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { CadastroDespesaPage } from '../cadastro-despesa/cadastro-despesa.page';
 import { CadastroReceitaPage } from '../cadastro-receita/cadastro-receita.page';
+import { EditaDespesaPage } from '../edita-despesa/edita-despesa.page';
+import { EditaReceitaPage } from '../edita-receita/edita-receita.page';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  styleUrls: ['home.page.scss'],
 })
 
 export class HomePage {
@@ -30,7 +32,6 @@ export class HomePage {
   movimentos: any[];
   loadingLista: boolean;
   emailUsuario: String;
-
   data = new Date().getDate();
   constructor(public router: Router,
     private dbService: DBService,
@@ -107,6 +108,43 @@ export class HomePage {
       this.totalReceita = this.totalReceita + this.receitas[index].valor;
     }
     return this.totalReceita;
+  }
+  async openMovimento(movimento: any) {
+    console.log(movimento);
+    if (movimento.tipo == "receita") {
+      const modal = await this.modalController.create({
+        component: EditaReceitaPage,
+        componentProps: {
+          editingReceita: movimento
+        }
+      });
+
+      modal.onDidDismiss()
+        .then(result => {
+          if (result.data) {
+            this.presentToast('Receita editada com sucesso');
+          }
+        });
+
+      return await modal.present();
+
+    } else if (movimento.tipo == "despesa") {
+      const modal = await this.modalController.create({
+        component: EditaDespesaPage,
+        componentProps: {
+          editingDespesa: movimento
+        }
+      });
+
+      modal.onDidDismiss()
+        .then(result => {
+          if (result.data) {
+            this.presentToast('Despesa editada com sucesso');
+          }
+        });
+
+      return await modal.present();
+    }
   }
 
   private totalSaldo() {

@@ -69,6 +69,8 @@ export class TelaDespesaPage implements OnInit {
   }
 
   voltar() {
+    console.log("teste");
+    
     this.modalController.dismiss();
   }
 }
