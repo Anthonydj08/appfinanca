@@ -48,7 +48,7 @@
     "cordova-plugin-firebasex": "^11.0.3",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-googleplus": "8.5.1",
-    "cordova-plugin-inappbrowser": "3.0.0",
+    "cordova-plugin-inappbrowser": "3.1.0",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^3.1.2",
     "cordova-plugin-screen-orientation": "3.0.1",
