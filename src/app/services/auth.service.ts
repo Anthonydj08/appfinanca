@@ -13,9 +13,9 @@ import AuthProvider = firebase.auth.AuthProvider;
 export class AuthService {
 
   private user: firebase.User;
-
+  winobj: any = null;
   constructor(private afa: AngularFireAuth, private googlePlus: GooglePlus) {
-
+    this.winobj = window;
     afa.authState.subscribe(user => {
       this.user = user;
     });
@@ -32,8 +32,31 @@ export class AuthService {
   senha(usuario: Usuario) {
     return this.afa.auth.sendPasswordResetEmail(usuario.email);
   }
+
+  is_local() {
+    if (/^file:\/{3}[^\/]/i.test(this.winobj.location.href)) {
+      return true;
+    }
+    return false;
+  }
+  
   logout() {
-    return this.afa.auth.signOut();
+
+    if (!this.is_local()) {
+      return this.afa.auth.signOut();
+    } else {
+      this.googlePlus.disconnect().then(
+        (msg) => {
+          alert('logout ok');
+          if (firebase.auth().currentUser) {
+            firebase.auth().signOut();
+          }
+        }).catch(
+          (msg) => {
+            alert('logout error: ' + msg);
+          })
+        ;
+    }
   }
 
   getAuth() {

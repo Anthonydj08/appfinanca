@@ -55,6 +55,7 @@ export class AppComponent implements OnInit {
   usuarios: Usuario[];
   usuario: Usuario;
   userEmail: string;
+  imagemUsuario: string;
 
   constructor(
     private platform: Platform,
@@ -79,6 +80,9 @@ export class AppComponent implements OnInit {
   private async loadUsuarios() {
     this.afAuth.user.subscribe(async user => {
       if (user) {
+        console.log(user);
+        
+        this.imagemUsuario = user.photoURL;
         this.userEmail = user.email;
         this.usuarios = await this.dbService.search<Usuario>('/usuario', 'email', this.userEmail);
         await this.loadUsuario();
