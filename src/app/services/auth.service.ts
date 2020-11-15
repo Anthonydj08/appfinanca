@@ -3,6 +3,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Usuario } from './../model/usuario';
 import * as firebase from 'firebase/app';
 
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
 import AuthProvider = firebase.auth.AuthProvider;
 
 @Injectable({
@@ -12,7 +14,7 @@ export class AuthService {
 
   private user: firebase.User;
 
-  constructor(private afa: AngularFireAuth) {
+  constructor(private afa: AngularFireAuth, private googlePlus: GooglePlus) {
 
     afa.authState.subscribe(user => {
       this.user = user;
@@ -44,8 +46,13 @@ export class AuthService {
   }
 
   signInWithGoogle() {
-    console.log('Sign in with google');
-    return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
+    return this.googlePlus.login({}).then(res => {
+      const user_data_google = res;
+      console.log(user_data_google);
+      return this.afa.auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(null, user_data_google.accessToken))
+    })
+    /*console.log('Sign in with google');
+    return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());*/
   }
 
   private oauthSignIn(provider: AuthProvider) {

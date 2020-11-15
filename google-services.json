@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "930709469497-3hh0r7mdgu687vregbnjn7glt1tta2k5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionic.controlefinancas",
+            "certificate_hash": "0e85f8762510514a3a0451ca097dcb1f47e4e974"
+          }
+        },
+        {
+          "client_id": "930709469497-37b8qjnjgk3qmm2pummu2gofmlrj501n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionic.controlefinancas",
+            "certificate_hash": "e266a2bf4c813bca8303dcf14cc6eb0971ad03a9"
+          }
+        },
+        {
           "client_id": "930709469497-45e8heej4dhjhfg1h9mdettav5opbqa5.apps.googleusercontent.com",
           "client_type": 3
         }

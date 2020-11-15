@@ -35,6 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network/ngx';
 
+import { GooglePlus} from '@ionic-native/google-plus/ngx';
+
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
   entryComponents: [],
@@ -65,6 +67,7 @@ import { Network } from '@ionic-native/network/ngx';
     Geolocation,
     GoogleMaps,
     Network,
+    GooglePlus,
   ],
   bootstrap: [AppComponent]
 })
