@@ -31,6 +31,10 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { GoogleMaps } from '@ionic-native/google-maps';
 
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
+import { Network } from '@ionic-native/network/ngx';
+
 @NgModule({
   declarations: [AppComponent, MenuItemComponent],
   entryComponents: [],
@@ -46,6 +50,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     MatTableModule,
     MatToolbarModule,
     FormsModule,
+    HttpClientModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,
@@ -57,7 +63,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     Firebase,
     ScreenOrientation,
     Geolocation,
-    GoogleMaps
+    GoogleMaps,
+    Network,
   ],
   bootstrap: [AppComponent]
 })

@@ -84,7 +84,6 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^3.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <plugin name="cordova-plugin-firebase" spec="2.0.5" />
     <universal-links>
         <host name="controlefinancasapp.page.link" scheme="https" />
         <host name="controlefinancas.firebaseapp.com" scheme="https">
@@ -93,8 +92,8 @@
     </universal-links>
     <preference name="AndroidLaunchMode" value="singleTask" />
     <plugin name="cordova-plugin-screen-orientation" spec="3.0.1" />
-    <preference name="android-minSdkVersion" value="19" />
-    <engine name="android" spec="7.1.4" />
+    <preference name="android-minSdkVersion" value="22" />
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="AIzaSyAmbIrpK3Zl0q7eATkOlBU0nUWINfSrflo" />
     <preference name="GOOGLE_MAPS_IOS_API_KEY" value="AIzaSyAmbIrpK3Zl0q7eATkOlBU0nUWINfSrflo" />
+    <allow-navigation href="*" />
 </widget>

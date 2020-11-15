@@ -66,6 +66,8 @@ export class HomePage {
       await this.totalReceitas();
       await this.totalSaldo();
       this.movimentos = this.despesas.concat(this.receitas);
+      console.log(this.movimentos);
+      
       this.loadingLista = false;
     }
 

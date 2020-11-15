@@ -11,6 +11,8 @@ import * as firebase from 'firebase/app';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Usuario } from './model/usuario';
 import { DBService } from './services/db.service';
+import { OfflineManagerService } from './services/offline-manager.service';
+import { NetworkService, ConnectionStatus  } from './services/network.service';
 
 @Component({
   selector: 'app-root',
@@ -62,7 +64,9 @@ export class AppComponent implements OnInit {
     private localNotifications: LocalNotifications,
     private afAuth: AngularFireAuth,
     private screenOrientation: ScreenOrientation,
-    private dbService: DBService
+    private dbService: DBService,
+    private offlineManager: OfflineManagerService,
+    private networkService: NetworkService
   ) {
     this.initializeApp();
     this.init();
@@ -127,6 +131,11 @@ export class AppComponent implements OnInit {
           }
         })
       })
+      this.networkService.onNetworkChange().subscribe((status: ConnectionStatus) => {
+        if (status == ConnectionStatus.Online) {
+          this.offlineManager.checkForEvents().subscribe();
+        }
+      });
     });
   }
 
