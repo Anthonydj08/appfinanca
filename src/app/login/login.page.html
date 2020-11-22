@@ -1,4 +1,4 @@
-<ion-content>
+<!-- <ion-content>
   <ion-slides pager="true" [options]="slideOpts">
     <ion-slide>
       <ion-grid fixed>
@@ -73,4 +73,69 @@
       <ion-label (click)="irCadastro()">Não tem uma conta? Cadastre-se agora</ion-label>
     </div>
   </ion-row>
+</ion-content> -->
+<ion-content>
+  <div class="background">
+    <div class="forma1"></div>
+    <div class="forma2"></div>
+    <div class="forma3"></div>
+    <div class="forma4"></div>
+  </div>
+  <div class="ion-padding login">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1>Login</h1>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            <ion-input class="ion-padding" placeholder="Email" [(ngModel)]="usuarioLogin.email" type="email" ></ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            
+            <ion-input class="ion-padding" placeholder="Senha" [(ngModel)]="usuarioLogin.senha" type="password"></ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            <ion-label (click)="senha()">Esqueceu a senha?</ion-label>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-button class="loginButton" fill="clear" expand="full" (click)="loginEmail()">Entrar</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="botoesLoginSocial">
+          
+          <ion-button class="loginGoogle" fill="clear" (click)="loginGoogle()">
+            <img class="imgIcon" src="../../assets/icon/google-icon.png" alt="logo google">
+            
+          </ion-button>
+          <ion-button class="loginFacebook" fill="clear" (click)="loginFacebook()">
+            <img class="imgIcon" src="../../assets/icon/facebook.png" alt="logo facebook">
+            
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <div>
+            <ion-label (click)="irCadastro()">Não tem conta? Cadastre-se</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
 </ion-content>

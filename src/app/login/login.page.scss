@@ -1,4 +1,4 @@
-ion-row,
+/*ion-row,
 ion-item,
 ion-grid {
   display: block;
@@ -27,4 +27,86 @@ ion-button {
 }
 .botaoFacebook{
   margin-top: -5px;
+}*/
+ion-content {
+  --overflow: hidden;
+}
+.background{
+  
+  .forma1{
+    position: absolute;
+    width: 811.75px;
+    height: 604.64px;
+    left: -674px;
+    top: -40px;
+
+    background: rgba(39, 76, 124, 0.75);
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    transform: rotate(-68deg);
+  }
+  .forma2{
+    position: absolute;
+    width: 417.37px;
+    height: 395.97px;
+    left: 239px;
+    top: -120px;
+
+    background: rgba(251, 177, 105, 0.6);
+    border-radius: 20px;
+    transform: rotate(22deg)
+  }
+  .forma3{
+    position: absolute;
+    width: 417.37px;
+    height: 395.97px;
+    left: 261px;
+    top: -60px;
+
+    background: rgba(254, 169, 84, 0.6);
+    border-radius: 20px;
+    transform: rotate(22deg)
+  }
+  .forma4{
+    position: absolute;
+    width: 1073.38px;
+    height: 1077.17px;
+    left: -530px;
+    top: 300px;
+
+    background: #274C7C;
+    border-radius: 20px;
+    transform: rotate(-69deg);
+  }
+}
+.login{
+  bottom: 0;
+  width: -webkit-fill-available;
+  position: absolute;
+  font-family: nunito;
+  font-style: normal;
+  color: #ffffff;
+  h1{
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 49px;
+  }
+  ion-input, ion-button{
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    color: #ffffff;
+  }
+  .botoesLoginSocial{
+    text-align: center;
+  }
+  .loginGoogle{
+    margin-right: 16px;
+    background-color: #ffffff;
+  }
+  .loginFacebook{
+    background-color: #ffffff;
+  }
+  .imgIcon{
+    width: 25px;
+  }
 }
