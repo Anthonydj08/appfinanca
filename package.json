@@ -38,7 +38,7 @@
     "@material/floating-label": "^1.1.0",
     "angularfire2": "^5.1.1",
     "br-mask": "0.0.4",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "cordova-browser": "6.0.0",
     "cordova-plugin-browsertab": "0.2.0",
     "cordova-plugin-buildinfo": "2.0.2",
